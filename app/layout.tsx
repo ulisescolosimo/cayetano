@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Knewave, Inter_Tight } from 'next/font/google'
 import './globals.css'
+import { AuthProvider } from '@/context/AuthContext'
 
 const knewave = Knewave({
   weight: '400',
@@ -27,7 +28,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${knewave.variable} ${interTight.variable}`}>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   )
 }

@@ -2,10 +2,23 @@
 
 import { useEffect, useRef } from 'react'
 import confetti from 'canvas-confetti'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 export default function WorldCupSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
+  const handleJoinClick = () => {
+    if (!user && !loading) {
+      router.push('/login')
+    } else if (user) {
+      // Aquí puedes agregar la lógica para cuando el usuario está logueado
+      console.log('Usuario autenticado, proceder con el proceso')
+    }
+  }
 
   useEffect(() => {
     // Solo activar confeti en pantallas grandes (desktop)
@@ -128,7 +141,10 @@ export default function WorldCupSection() {
           </p>
 
           {/* Botón */}
-          <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-sans font-bold text-base sm:text-lg md:text-xl lg:text-2xl leading-[127%] rounded-[13px] transition-colors duration-200 px-4 py-2 sm:px-6 sm:py-3">
+          <button 
+            onClick={handleJoinClick}
+            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-sans font-bold text-base sm:text-lg md:text-xl lg:text-2xl leading-[127%] rounded-[13px] transition-colors duration-200 px-4 py-2 sm:px-6 sm:py-3"
+          >
             Sumarme ahora por USD 18
           </button>
 

@@ -1,28 +1,64 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
+import { supabase } from '@/lib/supabase/client'
+import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
 
 export default function JoinSection() {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: ''
+    email: '',
+    password: '',
+    confirmPassword: ''
   })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+    // Limpiar error cuando el usuario empieza a escribir
+    if (error) setError(null)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí iría la lógica de envío del formulario
-    console.log('Formulario enviado:', formData)
+    setLoading(true)
+    setError(null)
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Las contraseñas no coinciden')
+      setLoading(false)
+      return
+    }
+
+    if (formData.password.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      })
+
+      if (error) throw error
+
+      router.push('/')
+      router.refresh()
+    } catch (error: any) {
+      setError(translateSupabaseError(error))
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -124,27 +160,12 @@ export default function JoinSection() {
                 {/* Sección derecha - Formulario */}
                 <div className="flex flex-col">
                   <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                    {/* Campo Nombre y apellido */}
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Nombre y apellido"
-                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
-                      required
-                    />
-
-                    {/* Campo Teléfono */}
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Teléfono"
-                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
-                      required
-                    />
+                    {/* Mensaje de error */}
+                    {error && (
+                      <div className="bg-red-50 border-l-4 border-red-500 text-red-700 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[8px] font-sans text-[12px] sm:text-[13px] md:text-[14px]">
+                        {error}
+                      </div>
+                    )}
 
                     {/* Campo Correo electrónico */}
                     <input
@@ -155,6 +176,31 @@ export default function JoinSection() {
                       placeholder="Correo electrónico"
                       className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
                       required
+                      autoComplete="email"
+                    />
+
+                    {/* Campo Contraseña */}
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="Contraseña"
+                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
+                      required
+                      autoComplete="new-password"
+                    />
+
+                    {/* Campo Confirmar contraseña */}
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      placeholder="Confirmar contraseña"
+                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
+                      required
+                      autoComplete="new-password"
                     />
 
                     {/* Botón */}
@@ -164,8 +210,9 @@ export default function JoinSection() {
                       size="lg"
                       className="w-full rounded-[8px] sm:rounded-[10px] md:rounded-[12px] px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 text-white font-sans font-bold text-[13px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]"
                       style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                      disabled={loading}
                     >
-                      Quiero ser socio productor
+                      {loading ? 'Creando cuenta...' : 'Quiero ser socio productor'}
                     </Button>
                   </form>
                 </div>

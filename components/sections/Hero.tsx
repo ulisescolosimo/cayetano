@@ -3,8 +3,23 @@
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { motion } from 'framer-motion'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 export default function Hero() {
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
+  const handleJoinClick = () => {
+    if (!user && !loading) {
+      router.push('/login')
+    } else if (user) {
+      // Aquí puedes agregar la lógica para cuando el usuario está logueado
+      // Por ejemplo, redirigir a una página de pago o dashboard
+      console.log('Usuario autenticado, proceder con el proceso')
+    }
+  }
+
   // Variantes de animación
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,6 +133,7 @@ export default function Hero() {
                 variant="primary" 
                 size="lg" 
                 className="!px-5 !py-2.5 !rounded-[13px] !font-sans !font-bold !text-base sm:!text-lg lg:!text-xl !leading-[127%] !tracking-normal w-full sm:w-auto"
+                onClick={handleJoinClick}
               >
                 Quiero ser parte
               </Button>

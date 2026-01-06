@@ -3,12 +3,25 @@
 import { useState } from 'react'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 export default function HowItWorksSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const { user, loading } = useAuth()
+  const router = useRouter()
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const handleJoinClick = () => {
+    if (!user && !loading) {
+      router.push('/login')
+    } else if (user) {
+      // Aquí puedes agregar la lógica para cuando el usuario está logueado
+      console.log('Usuario autenticado, proceder con el proceso')
+    }
   }
   const steps = [
     {
@@ -203,6 +216,7 @@ export default function HowItWorksSection() {
                   size="lg"
                   className="rounded-[13px] px-3 sm:px-4 py-2 sm:py-2.5 text-white font-sans font-bold text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] w-full sm:w-auto"
                   style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                  onClick={handleJoinClick}
                 >
                   Sumarme ahora por USD 18
                 </Button>
