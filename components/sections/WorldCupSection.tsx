@@ -41,10 +41,10 @@ export default function WorldCupSection() {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Configuración del confeti reducida al mínimo
+    // Configuración del confeti
     const confettiConfig = {
-      particleCount: 5, // Reducido de 30 a 5
-      spread: 40,
+      particleCount: 20, // Aumentado para más confeti visible
+      spread: 50,
       colors: ['#FFFFFF'],
       gravity: 0.3,
       drift: 0.2,
@@ -52,7 +52,7 @@ export default function WorldCupSection() {
       startVelocity: 15,
     }
 
-    // Función para disparar confeti muy esporádicamente
+    // Función para disparar confeti con mayor frecuencia
     const interval = setInterval(() => {
       const randomY = Math.random() * 0.6 + 0.2
       
@@ -75,7 +75,19 @@ export default function WorldCupSection() {
           y: randomY
         },
       })
-    }, 3000) // Reducido de 400ms a 3000ms (cada 3 segundos)
+
+      // Confeti adicional desde la parte superior (opcional, para más densidad)
+      if (Math.random() > 0.5) {
+        confettiInstance({
+          ...confettiConfig,
+          angle: Math.random() * 30 + 75,
+          origin: { 
+            x: Math.random() * 0.4 + 0.3,
+            y: 0
+          },
+        })
+      }
+    }, 1500) // Reducido a 1.5 segundos para más frecuencia
 
     return () => {
       clearInterval(interval)
