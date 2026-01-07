@@ -61,20 +61,18 @@ export default function WorldCupSection() {
     section.appendChild(canvas)
     canvasRef.current = canvas
 
+    // Configurar tamaño inicial del canvas
+    const rect = section.getBoundingClientRect()
+    canvas.width = rect.width
+    canvas.height = rect.height
+
     // Crear instancia de confetti para este canvas específico
+    // useWorker debe ser false cuando se necesita control manual del canvas
+    // resize: true permite que canvas-confetti maneje el resize automáticamente
     const confettiInstance = confetti.create(canvas, {
       resize: true,
-      useWorker: true,
+      useWorker: false, // Deshabilitado para evitar conflictos con resize
     })
-
-    // Configurar tamaño del canvas
-    const resizeCanvas = () => {
-      const rect = section.getBoundingClientRect()
-      canvas.width = rect.width
-      canvas.height = rect.height
-    }
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
 
     // Configuración del confeti
     const confettiConfig = {
@@ -126,7 +124,6 @@ export default function WorldCupSection() {
 
     return () => {
       clearInterval(interval)
-      window.removeEventListener('resize', resizeCanvas)
       if (canvas.parentNode) {
         canvas.parentNode.removeChild(canvas)
       }

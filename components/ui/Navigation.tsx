@@ -38,6 +38,12 @@ const JoinIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+const LoginIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+  </svg>
+)
+
 const navItems: NavItem[] = [
   { label: 'Inicio', href: '#hero', id: 'hero', icon: <HomeIcon /> },
   { label: 'El Proyecto', href: '#proyecto', id: 'proyecto', icon: <ProjectIcon /> },
@@ -114,6 +120,11 @@ export default function Navigation() {
     setIsMobileMenuOpen(false)
   }
 
+  const handleLoginClick = () => {
+    router.push('/login')
+    setIsMobileMenuOpen(false)
+  }
+
   // No mostrar en páginas de login/register
   if (pathname === '/login' || pathname === '/register') {
     return null
@@ -139,7 +150,7 @@ export default function Navigation() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="bg-white/80 backdrop-blur-sm shadow-lg rounded-l-2xl border-l border-t border-b border-gray-200/50 overflow-hidden"
           >
-            <div className="flex flex-col items-center py-8">
+            <div className="flex flex-col items-center py-4">
               {/* Items de navegación */}
               <div className="flex flex-col gap-2 w-full px-2">
                 {navItems.map((item, index) => {
@@ -199,6 +210,41 @@ export default function Navigation() {
                     </motion.button>
                   )
                 })}
+                
+                {/* Botón de Login - solo si no está autenticado */}
+                {!user && !loading && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 + navItems.length * 0.05 }}
+                    onClick={handleLoginClick}
+                    className="relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900 border border-gray-200"
+                  >
+                    {/* Icono - siempre visible */}
+                    <motion.div
+                      animate={{
+                        scale: isHovered ? 0.9 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 w-5 h-5 text-gray-600"
+                    >
+                      <LoginIcon />
+                    </motion.div>
+                    
+                    {/* Texto - solo visible cuando está desplegado */}
+                    <motion.span
+                      animate={{
+                        opacity: isHovered ? 1 : 0,
+                        x: isHovered ? 0 : -10,
+                        width: isHovered ? 'auto' : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden"
+                    >
+                      Iniciar sesión
+                    </motion.span>
+                  </motion.button>
+                )}
               </div>
             </div>
           </motion.div>
@@ -304,6 +350,22 @@ export default function Navigation() {
                       </motion.button>
                     )
                   })}
+                  
+                  {/* Botón de Login - solo si no está autenticado */}
+                  {!user && !loading && (
+                    <motion.button
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: navItems.length * 0.1 }}
+                      onClick={handleLoginClick}
+                      className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"
+                    >
+                      <div className="flex-shrink-0 w-5 h-5 text-gray-600">
+                        <LoginIcon />
+                      </div>
+                      <span className="font-sans font-medium text-base">Iniciar sesión</span>
+                    </motion.button>
+                  )}
                 </div>
               </div>
             </motion.div>
