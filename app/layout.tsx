@@ -20,19 +20,19 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   title: 'Proyecto 18 - Rumbo al mundial',
-  description: 'La previa la hacemos nosotros. Únete al proyecto más ambicioso del fútbol: 18 hinchas viajando al Mundial 2026.',
+  description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol: 18 hinchas viajando al Mundial 2026.',
   keywords: ['Mundial 2026', 'Proyecto 18', 'fútbol', 'hinchas', 'viaje al mundial', 'Argentina'],
   authors: [{ name: 'Proyecto 18' }],
   openGraph: {
     title: 'Proyecto 18 - Rumbo al mundial',
-    description: 'La previa la hacemos nosotros. Únete al proyecto más ambicioso del fútbol.',
+    description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
     type: 'website',
     locale: 'es_AR',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Proyecto 18 - Rumbo al mundial',
-    description: 'La previa la hacemos nosotros. Únete al proyecto más ambicioso del fútbol.',
+    description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
   },
   icons: {
     icon: '/images/⚽.png',
