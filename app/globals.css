@@ -9,8 +9,24 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply font-sans antialiased;
+  }
+
+  /* Ajuste para sidebar lateral - no necesitamos scroll-margin-top */
+  section[id] {
+    scroll-margin-top: 0;
+  }
+
+  /* Espacio para el sidebar en desktop */
+  @media (min-width: 1024px) {
+    body {
+      padding-left: 0;
+    }
   }
 }
 

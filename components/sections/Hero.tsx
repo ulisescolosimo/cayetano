@@ -56,8 +56,22 @@ export default function Hero() {
     },
   }
 
+  const handleMoreInfoClick = () => {
+    const element = document.getElementById('proyecto')
+    if (element) {
+      const offset = 40 // Offset reducido sin navbar superior
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
-    <section className="min-h-screen bg-white flex items-center">
+    <section id="hero" className="min-h-screen bg-white flex flex-col items-center justify-center lg:flex-row lg:items-center">
       <div className="flex flex-col lg:grid lg:grid-cols-[1.5fr_1fr] w-full max-w-[1380px] mx-auto">
         {/* Columna derecha - Imagen (arriba en mobile/tablet) */}
         <motion.div 
@@ -85,7 +99,7 @@ export default function Hero() {
           <div className="w-full max-w-2xl mx-auto lg:mx-0">
             {/* Header con PROYECTO 18 y PRODUCIDO POR Orsai */}
             <motion.div 
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-3 sm:gap-0 mb-4 sm:mb-0"
+              className="flex sm:flex-row items-center justify-between w-full gap-3 sm:gap-0 mb-4 sm:mb-0"
               variants={itemVariants}
             >
               <p className="text-xs sm:text-sm font-sans text-gray-800 font-medium uppercase tracking-wide">
@@ -141,6 +155,7 @@ export default function Hero() {
                 variant="outline" 
                 size="lg" 
                 className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-5 !py-2.5 !rounded-[13px] !font-sans !font-bold !text-base sm:!text-lg lg:!text-xl !leading-[127%] !tracking-normal w-full sm:w-auto"
+                onClick={handleMoreInfoClick}
               >
                 Más información
               </Button>

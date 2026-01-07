@@ -3,6 +3,7 @@ import { Knewave, Inter_Tight } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/AuthContext'
 import UserBadge from '@/components/ui/UserBadge'
+import Navigation from '@/components/ui/Navigation'
 
 const knewave = Knewave({
   weight: '400',
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="es" className={`${knewave.variable} ${interTight.variable}`}>
       <body>
         <AuthProvider>
+          <Navigation />
           <UserBadge />
           {children}
         </AuthProvider>

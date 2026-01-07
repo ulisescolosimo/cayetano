@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
@@ -8,6 +9,7 @@ import { useRouter } from 'next/navigation'
 export default function WorldCupSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
   const { user, loading } = useAuth()
   const router = useRouter()
 
@@ -21,9 +23,29 @@ export default function WorldCupSection() {
   }
 
   useEffect(() => {
+    // Observer para animaciones
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
     // Solo activar confeti en pantallas grandes (desktop)
     const isMobile = window.innerWidth < 1024
-    if (isMobile || !sectionRef.current) return
+    if (isMobile || !sectionRef.current) {
+      return () => {
+        if (sectionRef.current) {
+          observer.unobserve(sectionRef.current)
+        }
+      }
+    }
 
     const section = sectionRef.current
 
@@ -108,24 +130,37 @@ export default function WorldCupSection() {
       if (canvas.parentNode) {
         canvas.parentNode.removeChild(canvas)
       }
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
     }
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-brand py-8 sm:py-12 md:py-16 lg:py-20 confetti-pattern overflow-hidden">
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="relative w-full min-h-screen bg-brand py-8 sm:py-12 md:py-16 lg:py-20 confetti-pattern overflow-hidden flex flex-col items-center justify-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
           {/* Pelota de fútbol */}
-          <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
+            animate={isVisible ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.5, rotate: -180 }}
+            transition={{ duration: 0.8, type: 'spring', stiffness: 200 }}
+            className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
+          >
             <img 
               src="/images/⚽.png" 
               alt="Pelota de fútbol" 
               className="w-full h-full object-contain"
             />
-          </div>
+          </motion.div>
 
           {/* Título principal */}
-          <div className="space-y-3 sm:space-y-4 md:space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-3 sm:space-y-4 md:space-y-6"
+          >
             <h2 className="text-white font-sans text-lg sm:text-xl md:text-2xl lg:text-[32px] font-normal leading-[127%] text-center px-2">
               Sumate como <span className="font-bold">Socio Productor</span>
             </h2>
@@ -133,25 +168,40 @@ export default function WorldCupSection() {
             <h3 className="text-white font-display text-2xl sm:text-3xl md:text-4xl lg:text-[56px] font-normal leading-[127%] text-center px-2">
               La previa la hacemos nosotros
             </h3>
-          </div>
+          </motion.div>
 
           {/* Párrafo descriptivo */}
-          <p className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-[32px] font-normal leading-[127%] text-center max-w-3xl px-4">
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-[32px] font-normal leading-[127%] text-center max-w-3xl px-4"
+          >
             Durante 18 semanas co-diseñás junto a Cayetano 18 entrevistas en vivo. Vos proponés temas, votás preguntas y ayudás a armar el guion. Acá la audiencia no mira: <span className="font-bold">produce.</span>
-          </p>
+          </motion.p>
 
           {/* Botón */}
-          <button 
+          <motion.button 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleJoinClick}
             className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-sans font-bold text-base sm:text-lg md:text-xl lg:text-2xl leading-[127%] rounded-[13px] transition-colors duration-200 px-4 py-2 sm:px-6 sm:py-3"
           >
             Sumarme ahora por USD 18
-          </button>
+          </motion.button>
 
           {/* Texto final */}
-          <p className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-2xl font-normal leading-[109%] text-center px-4">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-2xl font-normal leading-[109%] text-center px-4"
+          >
             Aporte único. Cupos limitados. Comunidad adentro.
-          </p>
+          </motion.p>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
 import { useAuth } from '@/context/AuthContext'
@@ -8,8 +9,31 @@ import { useRouter } from 'next/navigation'
 
 export default function HowItWorksSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
   const { user, loading } = useAuth()
   const router = useRouter()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
@@ -103,27 +127,39 @@ export default function HowItWorksSection() {
 
   return (
     <section 
-      className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed"
+      ref={ref}
+      id="como-funciona"
+      className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed flex flex-col items-center justify-center lg:block"
       style={{
         backgroundImage: 'url(/images/Group%2015.png)',
       }}
     >
       {/* Contenedor principal */}
-      <div className="relative z-10 py-6 sm:py-8 md:py-12 lg:py-20 xl:py-40">
+      <div className="relative z-10 py-8 sm:py-8 md:py-12 lg:py-20 xl:py-40 w-full">
         <Container className="w-full">
-          {/* Título de la sección */}
-          <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px]" style={{ lineHeight: '78%' }}>
-              <span className="font-sans font-semibold" style={{ color: '#318CE7' }}>Cómo</span> <br />
-              <span className="font-display font-normal" style={{ color: '#318CE7' }}> funciona</span>
-            </h2>
-          </div>
+          {/* Sección Cómo funciona */}
+          <div className="py-20 sm:py-0">
+            {/* Título de la sección */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10"
+            >
+              <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px]" style={{ lineHeight: '78%' }}>
+                <span className="font-sans font-semibold" style={{ color: '#318CE7' }}>Cómo</span> <br />
+                <span className="font-display font-normal" style={{ color: '#318CE7' }}> funciona</span>
+              </h2>
+            </motion.div>
 
-          {/* Grid horizontal de tarjetas */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
-            {steps.map((step) => (
-              <div
+            {/* Grid horizontal de tarjetas */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
+            {steps.map((step, index) => (
+              <motion.div
                 key={step.number}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col"
                 style={{ backgroundColor: 'rgba(230, 230, 230)' }}
               >
@@ -143,15 +179,21 @@ export default function HowItWorksSection() {
                 <p className="font-sans text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] xl:text-[15px] font-normal text-black leading-[140%]">
                   {step.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
+          </div>
           </div>
 
           {/* Sección de Beneficios */}
-          <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 lg:mb-20 xl:mt-40 xl:mb-40 flex justify-center">
+          <div className="py-20 sm:py-0 mt-0 sm:mt-12 md:mt-16 lg:mt-20 lg:mb-20 xl:mt-40 xl:mb-40 flex justify-center">
             <div className="w-full max-w-4xl">
               {/* Título de la sección */}
-              <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center"
+              >
                 <h2 className="text-center" style={{ lineHeight: '94%' }}>
                   <span className="font-display text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-normal" style={{ color: '#318CE7' }}>
                     Beneficios{' '}
@@ -160,13 +202,16 @@ export default function HowItWorksSection() {
                     de ser <br/> socio-productor
                   </span>
                 </h2>
-              </div>
+              </motion.div>
 
               {/* Grid de tarjetas de beneficios (2 filas x 3 columnas) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
                 {benefits.map((benefit, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                     className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col"
                     style={{ backgroundColor: '#318CE7' }}
                   >
@@ -179,15 +224,20 @@ export default function HowItWorksSection() {
                     <p className="font-sans text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] xl:text-[16px] font-normal text-white leading-[140%]">
                       {benefit.description}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
 
           {/* Sección Regla simple */}
-          <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-40 xl:mb-40 flex justify-center">
-            <div className="w-full max-w-3xl text-center flex flex-col items-center gap-3 sm:gap-4">
+          <div className="py-20 sm:py-0 mt-0 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-40 xl:mb-40 flex justify-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="w-full max-w-3xl text-center flex flex-col items-center gap-3 sm:gap-4"
+            >
               {/* Título */}
               <div className="mb-3 sm:mb-4 md:mb-6">
                 <h2 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold text-center" style={{ lineHeight: '94%', color: '#3F3F3F' }}>
@@ -221,24 +271,32 @@ export default function HowItWorksSection() {
                   Sumarme ahora por USD 18
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Sección Preguntas frecuentes */}
-          <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 flex justify-center">
+          <div className="py-20 sm:py-0 mt-0 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 flex justify-center">
             <div className="w-full max-w-4xl">
               {/* Título de la sección */}
-              <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center"
+              >
                 <h2 className="font-display text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] xl:text-[36px] font-bold italic" style={{ color: '#3F3F3F' }}>
                   Preguntas frecuentes
                 </h2>
-              </div>
+              </motion.div>
 
               {/* Lista de preguntas */}
               <div className="space-y-3 sm:space-y-4 md:space-y-5">
                 {faqs.map((faq, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                     className="paper-texture rounded-[12px] sm:rounded-[16px] relative overflow-hidden"
                   >
                     <button
@@ -269,7 +327,7 @@ export default function HowItWorksSection() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

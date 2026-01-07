@@ -1,10 +1,40 @@
 'use client'
 
+import { useRef, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
 
 export default function Project18Section() {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
+
   return (
-    <section className="relative w-full md:min-h-screen md:min-h-screen overflow-hidden">
+    <section 
+      ref={ref}
+      id="proyecto" 
+      className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center lg:block"
+    >
       {/* Imagen de fondo */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -17,11 +47,14 @@ export default function Project18Section() {
       </div>
 
       {/* Contenedor principal con overlay gris semi-transparente */}
-      <div className="relative z-10 md:min-h-screen flex items-center py-8 md:py-12 lg:py-0">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center lg:flex-row lg:items-center py-8 md:py-12 lg:py-0 w-full">
         <Container className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Caja gris con texto - ocupa la mitad izquierda */}
-            <div 
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="p-4 sm:p-6 md:p-8 lg:p-6 lg:py-10 flex flex-col rounded-[16px]"
               style={{ backgroundColor: 'rgba(230, 230, 230)' }}
             >
@@ -44,7 +77,7 @@ export default function Project18Section() {
                 Porque cuando la comunidad se organiza, pasa lo mejor: Aparecen las preguntas más ocurrentes, los invitados más interesantes y momentos memorables.
               </p>
             </div>
-            </div>
+            </motion.div>
 
             {/* Espacio derecho - vacío para mostrar el fondo */}
             <div className="hidden lg:block relative" />

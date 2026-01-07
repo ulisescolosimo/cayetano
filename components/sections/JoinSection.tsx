@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Container from '@/components/ui/Container'
@@ -16,7 +17,30 @@ export default function JoinSection() {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLElement>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -63,7 +87,9 @@ export default function JoinSection() {
 
   return (
     <section 
-      className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
+      ref={ref}
+      id="sumate"
+      className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center lg:block"
       style={{
         backgroundImage: 'url(/images/759850a5204f8d36d69d72ddca160500cbfaa80c.png)',
       }}
@@ -72,10 +98,15 @@ export default function JoinSection() {
       <div className="absolute inset-0 bg-white/70" />
 
       {/* Contenedor principal */}
-      <div className="relative z-10 py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20">
+      <div className="relative z-10 py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 w-full">
         <Container className="w-full">
           {/* Título con emojis */}
-          <div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12 text-center px-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+            className="mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12 text-center px-2"
+          >
             <h2 className="font-display text-[20px] sm:text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-normal flex flex-row items-center justify-center gap-2 sm:gap-2 md:gap-3 lg:gap-4" style={{ color: '#3F3F3F' }}>
               <div className="hidden sm:flex items-center gap-1 sm:gap-1.5">
                 <Image 
@@ -119,17 +150,25 @@ export default function JoinSection() {
                 </svg>
               </div>
             </h2>
-          </div>
+          </motion.div>
 
           {/* Contenedor gris oscuro principal */}
           <div className="max-w-6xl mx-auto px-2 sm:px-0">
-            <div 
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10"
               style={{ backgroundColor: 'rgba(80, 80, 80, 0.95)' }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
                 {/* Sección izquierda - Información */}
-                <div className="flex flex-col">
+                <motion.div 
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex flex-col"
+                >
                   {/* Subtítulo con icono */}
                   <div className="mb-1 sm:mb-1.5 md:mb-2 flex items-center gap-1.5 sm:gap-2">
                     <div className="flex items-center gap-0.5 sm:gap-1">
@@ -155,10 +194,15 @@ export default function JoinSection() {
                   <p className="font-sans text-[14px] sm:text-[16px] md:text-[17px] lg:text-[18px] font-normal text-white max-w-full lg:max-w-md" style={{ lineHeight: '144%' }}>
                     Tu aporte de USD 18 sostiene la producción del ciclo (logística, operación, contenido y dinámica participativa) y hace posible que la comunidad sea parte real de lo que pasa. <span className="font-bold">Acá no estás "colaborando": estás produciendo.</span>
                   </p>
-                </div>
+                </motion.div>
 
                 {/* Sección derecha - Formulario */}
-                <div className="flex flex-col">
+                <motion.div 
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-col"
+                >
                   <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
                     {/* Mensaje de error */}
                     {error && (
@@ -215,16 +259,21 @@ export default function JoinSection() {
                       {loading ? 'Creando cuenta...' : 'Quiero ser socio productor'}
                     </Button>
                   </form>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Footer con texto */}
-            <div className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 text-center px-2">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 text-center px-2"
+            >
               <p className="font-sans text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-normal" style={{ color: '#3F3F3F' }}>
                 Aporte único. Cupos limitados. Comunidad adentro.
               </p>
-            </div>
+            </motion.div>
           </div>
         </Container>
       </div>
