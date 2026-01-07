@@ -54,7 +54,18 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  // Proteger las rutas /miembros y /perfil - solo usuarios autenticados
+  if (request.nextUrl.pathname.startsWith('/miembros') || request.nextUrl.pathname.startsWith('/perfil')) {
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/login'
+      return NextResponse.redirect(url)
+    }
+  }
 
   return response
 }

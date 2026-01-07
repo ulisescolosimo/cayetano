@@ -134,7 +134,7 @@ export default function Hero() {
               </h1>
               
               <p className="text-base sm:text-xl md:text-2xl lg:text-[28px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
-                La manija es total. Poniendo 18 dólares podes ser parte de las entrevistas que van a calentar la previa del mundial de fútbol 2026.
+                La manija es total. Aportando 18 dólares pódes ser parte de las entrevistas que van a calentar la previa del mundial de fútbol 2026.
               </p>
             </motion.div>
             

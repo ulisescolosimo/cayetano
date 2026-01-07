@@ -51,3 +51,4 @@ export function useScrollReveal(options: UseScrollRevealOptions = {}) {
   return { ref, isVisible }
 }
 
+

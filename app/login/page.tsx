@@ -30,7 +30,7 @@ export default function LoginPage() {
 
       if (error) throw error
 
-      router.push('/')
+      router.push('/miembros')
       router.refresh()
     } catch (error: any) {
       setError(translateSupabaseError(error))

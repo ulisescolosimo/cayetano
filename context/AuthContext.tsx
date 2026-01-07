@@ -55,7 +55,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut()
-    router.push('/')
+    // Usar window.location para forzar una navegación completa y evitar el middleware
+    window.location.href = '/'
   }
 
   return (
@@ -64,6 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     </AuthContext.Provider>
   )
 }
+
 
 
 

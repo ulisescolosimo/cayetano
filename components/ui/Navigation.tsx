@@ -44,6 +44,12 @@ const LoginIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+const MembersIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+  </svg>
+)
+
 const navItems: NavItem[] = [
   { label: 'Inicio', href: '#hero', id: 'hero', icon: <HomeIcon /> },
   { label: 'El Proyecto', href: '#proyecto', id: 'proyecto', icon: <ProjectIcon /> },
@@ -59,8 +65,13 @@ export default function Navigation() {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Detectar sección activa al hacer scroll
+  // Determinar si estamos en la página de miembros
+  const isMembersPage = pathname === '/miembros'
+
+  // Detectar sección activa al hacer scroll - solo si NO estamos en la página de miembros
   useEffect(() => {
+    if (isMembersPage) return
+
     const handleScroll = () => {
       const sections = navItems.map(item => item.id)
       const scrollPosition = window.scrollY + 150
@@ -81,7 +92,7 @@ export default function Navigation() {
     handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isMembersPage])
 
   const handleNavClick = (e: React.MouseEvent<HTMLButtonElement>, href: string) => {
     e.preventDefault()
@@ -125,6 +136,16 @@ export default function Navigation() {
     setIsMobileMenuOpen(false)
   }
 
+  const handleMembersClick = () => {
+    router.push('/miembros')
+    setIsMobileMenuOpen(false)
+  }
+
+  const handleHomeClick = () => {
+    router.push('/')
+    setIsMobileMenuOpen(false)
+  }
+
   // No mostrar en páginas de login/register
   if (pathname === '/login' || pathname === '/register') {
     return null
@@ -153,7 +174,8 @@ export default function Navigation() {
             <div className="flex flex-col items-center py-4">
               {/* Items de navegación */}
               <div className="flex flex-col gap-2 w-full px-2">
-                {navItems.map((item, index) => {
+                {/* Items del home - solo si NO estamos en la página de miembros */}
+                {!isMembersPage && navItems.map((item, index) => {
                   const isActive = activeSection === item.id
                   const isSumate = item.id === 'sumate'
                   return (
@@ -210,7 +232,118 @@ export default function Navigation() {
                     </motion.button>
                   )
                 })}
+
+                {/* Botón para volver al home - solo si estamos en la página de miembros */}
+                {isMembersPage && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    onClick={handleHomeClick}
+                    className="relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    {/* Icono - siempre visible */}
+                    <motion.div
+                      animate={{
+                        scale: isHovered ? 0.9 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 w-5 h-5 text-gray-600"
+                    >
+                      <HomeIcon />
+                    </motion.div>
+                    
+                    {/* Texto - solo visible cuando está desplegado */}
+                    <motion.span
+                      animate={{
+                        opacity: isHovered ? 1 : 0,
+                        x: isHovered ? 0 : -10,
+                        width: isHovered ? 'auto' : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden"
+                    >
+                      Volver al inicio
+                    </motion.span>
+                  </motion.button>
+                )}
                 
+                {/* Botón de Miembros - solo si está autenticado y NO estamos en la página de miembros */}
+                {user && !loading && !isMembersPage && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 + navItems.length * 0.05 }}
+                    onClick={handleMembersClick}
+                    className="relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    {/* Icono - siempre visible */}
+                    <motion.div
+                      animate={{
+                        scale: isHovered ? 0.9 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 w-5 h-5 text-gray-600"
+                    >
+                      <MembersIcon />
+                    </motion.div>
+                    
+                    {/* Texto - solo visible cuando está desplegado */}
+                    <motion.span
+                      animate={{
+                        opacity: isHovered ? 1 : 0,
+                        x: isHovered ? 0 : -10,
+                        width: isHovered ? 'auto' : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden"
+                    >
+                      Miembros
+                    </motion.span>
+                  </motion.button>
+                )}
+
+                {/* Botón de Miembros activo - solo si estamos en la página de miembros */}
+                {isMembersPage && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 bg-brand/10 text-brand"
+                  >
+                    {/* Indicador activo - línea vertical */}
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-brand rounded-r-full"
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    />
+                    
+                    {/* Icono - siempre visible */}
+                    <motion.div
+                      animate={{
+                        scale: isHovered ? 0.9 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 w-5 h-5 text-brand"
+                    >
+                      <MembersIcon />
+                    </motion.div>
+                    
+                    {/* Texto - solo visible cuando está desplegado */}
+                    <motion.span
+                      animate={{
+                        opacity: isHovered ? 1 : 0,
+                        x: isHovered ? 0 : -10,
+                        width: isHovered ? 'auto' : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                      className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden text-brand font-semibold"
+                    >
+                      Miembros
+                    </motion.span>
+                  </motion.button>
+                )}
+
                 {/* Botón de Login - solo si no está autenticado */}
                 {!user && !loading && (
                   <motion.button
@@ -315,7 +448,8 @@ export default function Navigation() {
 
                 {/* Items de navegación */}
                 <div className="flex flex-col gap-2 flex-1">
-                  {navItems.map((item, index) => {
+                  {/* Items del home - solo si NO estamos en la página de miembros */}
+                  {!isMembersPage && navItems.map((item, index) => {
                     const isActive = activeSection === item.id
                     const isSumate = item.id === 'sumate'
                     return (
@@ -350,7 +484,62 @@ export default function Navigation() {
                       </motion.button>
                     )
                   })}
+
+                  {/* Botón para volver al home - solo si estamos en la página de miembros */}
+                  {isMembersPage && (
+                    <motion.button
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 }}
+                      onClick={handleHomeClick}
+                      className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left bg-gray-50 text-gray-700 hover:bg-gray-100"
+                    >
+                      <div className="flex-shrink-0 w-5 h-5 text-gray-600">
+                        <HomeIcon />
+                      </div>
+                      <span className="font-sans font-medium text-base">Volver al inicio</span>
+                    </motion.button>
+                  )}
                   
+                  {/* Botón de Miembros - solo si está autenticado y NO estamos en la página de miembros */}
+                  {user && !loading && !isMembersPage && (
+                    <motion.button
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: navItems.length * 0.1 }}
+                      onClick={handleMembersClick}
+                      className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left bg-gray-50 text-gray-700 hover:bg-gray-100"
+                    >
+                      <div className="flex-shrink-0 w-5 h-5 text-gray-600">
+                        <MembersIcon />
+                      </div>
+                      <span className="font-sans font-medium text-base">
+                        Miembros
+                      </span>
+                    </motion.button>
+                  )}
+
+                  {/* Botón de Miembros activo - solo si estamos en la página de miembros */}
+                  {isMembersPage && (
+                    <motion.button
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left bg-brand/10 text-brand"
+                    >
+                      <div className="flex-shrink-0 w-5 h-5 text-brand">
+                        <MembersIcon />
+                      </div>
+                      <span className="font-sans font-medium text-base text-brand font-semibold">
+                        Miembros
+                      </span>
+                      <motion.div
+                        layoutId="mobileActiveIndicator"
+                        className="ml-auto w-2 h-2 bg-brand rounded-full"
+                      />
+                    </motion.button>
+                  )}
+
                   {/* Botón de Login - solo si no está autenticado */}
                   {!user && !loading && (
                     <motion.button
