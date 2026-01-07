@@ -175,9 +175,9 @@ export default function WorldCupSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-[32px] font-normal leading-[127%] text-center max-w-3xl px-4"
+            className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-[32px] font-normal leading-relaxed lg:leading-[150%] text-center max-w-5xl px-4"
           >
-            Durante 18 semanas co-diseñás junto a Cayetano 18 entrevistas en vivo. Vos proponés temas, votás preguntas y ayudás a armar el guion. Acá la audiencia no mira: <span className="font-bold">produce.</span>
+            Durante 18 semanas co-diseñás junto a Cayetano 18 entrevistas en vivo. Vos proponés temas, votás preguntas y ayudás a armar el guion. <span className="font-bold">Acá la audiencia no mira: produce.</span>
           </motion.p>
 
           {/* Botón */}

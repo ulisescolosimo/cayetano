@@ -106,7 +106,7 @@ export default function Hero() {
                 PROYECTO 18
               </p>
               
-              <div className="text-left sm:text-right">
+              <div className="text-left sm:text-right hidden">
                 <p className="text-xs sm:text-sm text-gray-600 font-sans uppercase tracking-wide">
                   PRODUCIDO POR
                 </p>
