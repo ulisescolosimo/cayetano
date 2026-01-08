@@ -7,6 +7,7 @@ import { useProfile } from '@/hooks/useProfile'
 import { useAuth } from '@/context/AuthContext'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
+import { COUNTRIES } from '@/lib/utils/countries'
 
 export default function CompleteProfile() {
   const { user } = useAuth()
@@ -14,6 +15,8 @@ export default function CompleteProfile() {
   const router = useRouter()
   const [nombre, setNombre] = useState(profile?.nombre || '')
   const [apellido, setApellido] = useState(profile?.apellido || '')
+  const [genero, setGenero] = useState<'masculino' | 'femenino' | ''>(profile?.genero || '')
+  const [pais, setPais] = useState(profile?.pais || '')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -22,6 +25,8 @@ export default function CompleteProfile() {
     if (profile) {
       setNombre(profile.nombre || '')
       setApellido(profile.apellido || '')
+      setGenero(profile.genero || '')
+      setPais(profile.pais || '')
     }
   }, [profile])
 
@@ -29,7 +34,7 @@ export default function CompleteProfile() {
     e.preventDefault()
     setError(null)
 
-    if (!nombre.trim() || !apellido.trim()) {
+    if (!nombre.trim() || !apellido.trim() || !genero || !pais) {
       setError('Por favor completá todos los campos')
       return
     }
@@ -40,6 +45,8 @@ export default function CompleteProfile() {
       await updateProfile({
         nombre: nombre.trim(),
         apellido: apellido.trim(),
+        genero: genero as 'masculino' | 'femenino',
+        pais: pais,
       })
       // Refrescar el perfil para actualizar el estado
       await refreshProfile()
@@ -148,6 +155,45 @@ export default function CompleteProfile() {
                   value={apellido}
                   onChange={(e) => setApellido(e.target.value)}
                 />
+              </div>
+
+              <div>
+                <label htmlFor="genero" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                  Género
+                </label>
+                <select
+                  id="genero"
+                  name="genero"
+                  required
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                  value={genero}
+                  onChange={(e) => setGenero(e.target.value as 'masculino' | 'femenino' | '')}
+                >
+                  <option value="">Seleccioná tu género</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="pais" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                  País
+                </label>
+                <select
+                  id="pais"
+                  name="pais"
+                  required
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                  value={pais}
+                  onChange={(e) => setPais(e.target.value)}
+                >
+                  <option value="">Seleccioná tu país</option>
+                  {COUNTRIES.map((country) => (
+                    <option key={country.value} value={country.value}>
+                      {country.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 

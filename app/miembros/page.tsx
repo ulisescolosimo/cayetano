@@ -107,8 +107,8 @@ export default function MembersPage() {
             >
               <h1 className="text-white font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal leading-[127%]">
                 {profile?.nombre && profile?.apellido
-                  ? `Bienvenido, ${profile.nombre} ${profile.apellido}`
-                  : 'Bienvenido'}
+                  ? `${profile.genero === 'femenino' ? 'Bienvenida' : 'Bienvenido'}, ${profile.nombre} ${profile.apellido}`
+                  : profile?.genero === 'femenino' ? 'Bienvenida' : 'Bienvenido'}
               </h1>
               <p className="text-gray-300 font-sans text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-relaxed max-w-2xl mx-auto px-4">
                 El Mundial 2026 se acerca. Cada segundo cuenta.

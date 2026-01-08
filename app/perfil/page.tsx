@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import Footer from '@/components/sections/Footer'
+import { COUNTRIES } from '@/lib/utils/countries'
 
 export default function ProfilePage() {
   const { user, loading: authLoading } = useAuth()
@@ -17,6 +18,8 @@ export default function ProfilePage() {
   const [nombre, setNombre] = useState('')
   const [apellido, setApellido] = useState('')
   const [email, setEmail] = useState('')
+  const [genero, setGenero] = useState<'masculino' | 'femenino' | ''>('')
+  const [pais, setPais] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
@@ -27,6 +30,8 @@ export default function ProfilePage() {
       setNombre(profile.nombre || '')
       setApellido(profile.apellido || '')
       setEmail(profile.email || user?.email || '')
+      setGenero(profile.genero || '')
+      setPais(profile.pais || '')
     }
   }, [profile, user])
 
@@ -54,6 +59,8 @@ export default function ProfilePage() {
         nombre: nombre.trim(),
         apellido: apellido.trim(),
         email: email.trim() || user?.email || '',
+        genero: genero ? (genero as 'masculino' | 'femenino') : null,
+        pais: pais || null,
       })
       setSuccess(true)
       setTimeout(() => setSuccess(false), 3000)
@@ -142,38 +149,82 @@ export default function ProfilePage() {
               )}
 
               <div className="space-y-3">
-                <div>
-                  <label htmlFor="nombre" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
-                    Nombre
-                  </label>
-                  <input
-                    id="nombre"
-                    name="nombre"
-                    type="text"
-                    required
-                    className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
-                    placeholder="Tu nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                  />
+                {/* Primera fila: Nombre y Apellido en dos columnas */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="nombre" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                      Nombre
+                    </label>
+                    <input
+                      id="nombre"
+                      name="nombre"
+                      type="text"
+                      required
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                      placeholder="Tu nombre"
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="apellido" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                      Apellido
+                    </label>
+                    <input
+                      id="apellido"
+                      name="apellido"
+                      type="text"
+                      required
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                      placeholder="Tu apellido"
+                      value={apellido}
+                      onChange={(e) => setApellido(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="apellido" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
-                    Apellido
-                  </label>
-                  <input
-                    id="apellido"
-                    name="apellido"
-                    type="text"
-                    required
-                    className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
-                    placeholder="Tu apellido"
-                    value={apellido}
-                    onChange={(e) => setApellido(e.target.value)}
-                  />
+                {/* Segunda fila: País y Género en dos columnas */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label htmlFor="pais" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                      País
+                    </label>
+                    <select
+                      id="pais"
+                      name="pais"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                      value={pais}
+                      onChange={(e) => setPais(e.target.value)}
+                    >
+                      <option value="">Seleccioná tu país</option>
+                      {COUNTRIES.map((country) => (
+                        <option key={country.value} value={country.value}>
+                          {country.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="genero" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
+                      Género
+                    </label>
+                    <select
+                      id="genero"
+                      name="genero"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                      value={genero}
+                      onChange={(e) => setGenero(e.target.value as 'masculino' | 'femenino' | '')}
+                    >
+                      <option value="">Seleccioná tu género</option>
+                      <option value="masculino">Masculino</option>
+                      <option value="femenino">Femenino</option>
+                    </select>
+                  </div>
                 </div>
 
+                {/* Tercera fila: Email ocupando toda la columna */}
                 <div>
                   <label htmlFor="email" className="block text-xs font-sans font-medium text-gray-700 mb-1.5">
                     Email
@@ -208,7 +259,13 @@ export default function ProfilePage() {
                 
                 <button
                   type="button"
-                  onClick={() => router.push('/miembros')}
+                  onClick={() => {
+                    if (!genero) {
+                      setError('Debés completar el género antes de continuar')
+                      return
+                    }
+                    router.push('/miembros')
+                  }}
                   className="w-full rounded-[13px] px-4 py-2.5 text-gray-700 font-sans font-medium text-sm border-2 border-gray-200 hover:bg-gray-50 transition-colors"
                 >
                   Volver

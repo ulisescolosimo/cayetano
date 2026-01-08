@@ -7,6 +7,8 @@ export interface Profile {
   nombre: string | null
   apellido: string | null
   email: string | null
+  genero: 'masculino' | 'femenino' | null
+  pais: string | null
   created_at?: string
   updated_at?: string
 }
@@ -43,6 +45,8 @@ export function useProfile(user: User | null) {
               email: user.email,
               nombre: null,
               apellido: null,
+              genero: null,
+              pais: null,
             })
             .select()
             .single()
@@ -67,7 +71,7 @@ export function useProfile(user: User | null) {
     fetchProfile()
   }, [fetchProfile])
 
-  const updateProfile = async (updates: { nombre?: string; apellido?: string; email?: string }) => {
+  const updateProfile = async (updates: { nombre?: string; apellido?: string; email?: string; genero?: 'masculino' | 'femenino' | null; pais?: string | null }) => {
     if (!user) {
       throw new Error('Usuario no autenticado')
     }
@@ -96,7 +100,14 @@ export function useProfile(user: User | null) {
   }
 
   const isProfileComplete = () => {
-    return profile?.nombre && profile?.apellido && profile.nombre.trim() !== '' && profile.apellido.trim() !== ''
+    return (
+      profile?.nombre &&
+      profile?.apellido &&
+      profile.nombre.trim() !== '' &&
+      profile.apellido.trim() !== '' &&
+      profile.genero !== null &&
+      profile.genero !== ''
+    )
   }
 
   const refreshProfile = async () => {
