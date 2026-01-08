@@ -39,3 +39,5 @@ Se han configurado las siguientes políticas Row Level Security:
 - Si un usuario no tiene perfil, se crea uno vacío al intentar acceder
 - El email se sincroniza desde `auth.users` pero también se guarda en la tabla para facilitar consultas
 
+
+
