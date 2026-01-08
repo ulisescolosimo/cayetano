@@ -105,8 +105,7 @@ export function useProfile(user: User | null) {
       profile?.apellido &&
       profile.nombre.trim() !== '' &&
       profile.apellido.trim() !== '' &&
-      profile.genero !== null &&
-      profile.genero !== ''
+      profile.genero !== null
     )
   }
 
