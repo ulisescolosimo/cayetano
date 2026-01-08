@@ -43,11 +43,11 @@ export default function CompleteProfile() {
       })
       // Refrescar el perfil para actualizar el estado
       await refreshProfile()
-      // Recargar la página para que se actualice el estado
-      router.refresh()
+      // Navegar a miembros automáticamente después de completar el perfil
+      // Usar window.location para forzar una recarga completa y asegurar que todos los hooks se reinicialicen
+      window.location.href = '/miembros'
     } catch (err: any) {
       setError(err.message || 'Error al guardar el perfil')
-    } finally {
       setLoading(false)
     }
   }
