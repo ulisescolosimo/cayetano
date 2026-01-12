@@ -59,13 +59,10 @@ export default function Hero() {
   const handleMoreInfoClick = () => {
     const element = document.getElementById('proyecto')
     if (element) {
-      const offset = 40 // Offset reducido sin navbar superior
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
+      // Usa scrollIntoView que respeta el scroll-margin-top de CSS
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
       })
     }
   }

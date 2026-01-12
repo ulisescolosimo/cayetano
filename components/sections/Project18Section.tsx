@@ -33,7 +33,8 @@ export default function Project18Section() {
     <section 
       ref={ref}
       id="proyecto" 
-      className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center lg:block"
+      className="relative w-full py-8 md:py-0 md:min-h-screen overflow-hidden flex flex-col items-center justify-center lg:block"
+      style={{ scrollMarginTop: '0px' }}
     >
       {/* Imagen de fondo */}
       <div 
@@ -47,7 +48,7 @@ export default function Project18Section() {
       </div>
 
       {/* Contenedor principal con overlay gris semi-transparente */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center lg:flex-row lg:items-center py-8 md:py-12 lg:py-0 w-full">
+      <div className="relative z-10 md:min-h-screen flex flex-col items-center justify-center lg:flex-row lg:items-center py-8 md:py-12 lg:py-0 w-full">
         <Container className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Caja gris con texto - ocupa la mitad izquierda */}
