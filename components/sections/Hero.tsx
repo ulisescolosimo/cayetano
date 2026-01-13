@@ -68,9 +68,22 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="min-h-screen bg-white flex flex-col items-center justify-center lg:flex-row lg:items-center">
-      <div className="flex flex-col lg:grid lg:grid-cols-[1.5fr_1fr] w-full max-w-[1380px] mx-auto">
-        {/* Columna derecha - Imagen (arriba en mobile/tablet) */}
+    <section id="hero" className="relative min-h-screen bg-white flex flex-col items-center justify-center lg:flex-row lg:items-center overflow-hidden">
+      {/* Imagen de fondo para mobile y tablet */}
+      <div className="absolute inset-0 lg:hidden z-0">
+        <div className="relative w-full h-full">
+          <Image
+            src="/images/cayetano-2026.png"
+            alt="Cayetano"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+      </div>
+      
+      <div className="relative z-10 flex flex-col lg:grid lg:grid-cols-[1.5fr_1fr] w-full max-w-[1380px] mx-auto">
+        {/* Columna derecha - Imagen (solo desktop) */}
         <motion.div 
           className="hidden lg:block relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-screen lg:min-h-screen order-1 lg:order-2"
           variants={imageVariants}
