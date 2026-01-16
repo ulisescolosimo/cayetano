@@ -305,17 +305,6 @@ export default function JoinSection() {
               </div>
             </motion.div>
 
-            {/* Footer con texto */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 text-center px-2"
-            >
-              <p className="font-sans text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-normal" style={{ color: '#3F3F3F' }}>
-                Aporte único. Cupos limitados. Comunidad adentro.
-              </p>
-            </motion.div>
           </div>
         </Container>
       </div>

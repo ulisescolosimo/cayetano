@@ -190,15 +190,6 @@ export default function WorldCupSection() {
             Sumarme ahora por USD 18
           </motion.button>
 
-          {/* Texto final */}
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-2xl font-normal leading-[109%] text-center px-4"
-          >
-            Aporte único. Cupos limitados. Comunidad adentro.
-          </motion.p>
         </div>
       </div>
     </section>
