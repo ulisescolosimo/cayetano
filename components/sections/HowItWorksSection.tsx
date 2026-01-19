@@ -171,12 +171,12 @@ export default function HowItWorksSection() {
                 </div>
                 
                 {/* Título */}
-                <h3 className="font-sans text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-bold text-black mb-1.5 sm:mb-2 md:mb-3">
+                <h3 className="font-sans text-[18px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-bold text-black mb-1.5 sm:mb-2 md:mb-3">
                   {step.title}
                 </h3>
                 
                 {/* Descripción */}
-                <p className="font-sans text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] xl:text-[15px] font-normal text-black leading-[140%]">
+                <p className="font-sans text-[14px] sm:text-[12px] md:text-[13px] lg:text-[14px] xl:text-[15px] font-normal text-black leading-[140%]">
                   {step.description}
                 </p>
               </motion.div>
@@ -216,12 +216,12 @@ export default function HowItWorksSection() {
                     style={{ backgroundColor: '#318CE7' }}
                   >
                     {/* Título */}
-                    <h3 className="font-sans text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] xl:text-[20px] font-bold text-white mb-1.5 sm:mb-2 md:mb-3">
+                    <h3 className="font-sans text-[18px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-bold text-white mb-1.5 sm:mb-2 md:mb-3">
                       {benefit.title}
                     </h3>
                     
                     {/* Descripción */}
-                    <p className="font-sans text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] xl:text-[16px] font-normal text-white leading-[140%]">
+                    <p className="font-sans text-[14px] sm:text-[12px] md:text-[13px] lg:text-[14px] xl:text-[15px] font-normal text-white leading-[140%]">
                       {benefit.description}
                     </p>
                   </motion.div>

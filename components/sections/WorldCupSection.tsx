@@ -134,7 +134,7 @@ export default function WorldCupSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full md:min-h-screen bg-brand py-8 sm:py-12 md:py-16 lg:py-20 confetti-pattern overflow-hidden flex flex-col items-center justify-center">
+    <section ref={sectionRef} className="relative w-full min-h-screen bg-brand py-8 sm:py-12 md:py-16 lg:py-20 confetti-pattern overflow-hidden flex flex-col items-center justify-center">
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
           {/* Pelota de fútbol */}

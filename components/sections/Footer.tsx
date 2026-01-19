@@ -35,7 +35,7 @@ export default function Footer() {
               <Image
                 src="/images/logo orsai.png"
                 alt="Orsai"
-                width={120}
+                width={70}
                 height={40}
                 className="h-auto w-auto max-h-[35px] md:max-h-[45px]"
                 priority
