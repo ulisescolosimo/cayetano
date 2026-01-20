@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
   },
   icons: {
-    icon: '/images/⚽.png',
-    shortcut: '/images/⚽.png',
-    apple: '/images/⚽.png',
+    icon: '/images/favicon p18.png',
+    shortcut: '/images/favicon p18.png',
+    apple: '/images/favicon p18.png',
   },
 }
 

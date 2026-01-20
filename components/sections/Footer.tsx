@@ -5,13 +5,18 @@ import Image from 'next/image'
 export default function Footer() {
   return (
     <footer className="w-full bg-brand py-6 md:py-8 flex flex-col items-center justify-center md:justify-start lg:block">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 xl:px-16 2xl:px-20">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
           {/* Sección izquierda: PROYECTO 18 */}
           <div className="flex-shrink-0">
-            <h3 className="font-sans font-bold text-[24px] uppercase text-white text-center leading-[109%] tracking-normal">
-              PROYECTO 18
-            </h3>
+            <Image
+              src="/images/descarga.png"
+              alt="Proyecto 18"
+              width={200}
+              height={50}
+              className="h-auto w-auto max-h-[50px]"
+              priority
+            />
           </div>
 
           {/* Sección central: Rumbo al Mundial (imagen) */}

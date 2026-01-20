@@ -112,9 +112,14 @@ export default function Hero() {
               className="flex sm:flex-row items-center justify-between w-full gap-3 sm:gap-0 mb-4 sm:mb-0"
               variants={itemVariants}
             >
-              <p className="text-xs sm:text-sm font-sans text-gray-800 font-medium uppercase tracking-wide">
-                PROYECTO 18
-              </p>
+              <Image
+                src="/images/P18.png"
+                alt="Proyecto 18"
+                width={120}
+                height={40}
+                className="h-auto w-auto"
+                style={{ height: 'auto' }}
+              />
               
               <div className="text-left sm:text-right hidden">
                 <p className="text-xs sm:text-sm text-gray-600 font-sans uppercase tracking-wide">
@@ -143,8 +148,8 @@ export default function Hero() {
                 <span className="text-brand font-display font-normal text-[52px] sm:text-[72px] md:text-[96px] lg:text-[120px] block -mt-1 sm:-mt-2">Mundial</span>
               </h1>
               
-              <p className="text-base sm:text-xl md:text-2xl lg:text-[28px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
-                La manija es total. Aportando 18 dólares pódes ser parte de las entrevistas que van a calentar la previa del mundial de fútbol 2026.
+              <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
+                La manija es total. Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. Además, hay sorteos durante toda la temporada y un gran sorteo final: <span className="font-bold text-brand">un viaje al Mundial</span>.
               </p>
             </motion.div>
             
