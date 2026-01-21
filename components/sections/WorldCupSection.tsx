@@ -159,7 +159,7 @@ export default function WorldCupSection() {
             className="space-y-3 sm:space-y-4 md:space-y-6"
           >
             <h2 className="text-white font-sans text-lg sm:text-xl md:text-2xl lg:text-[32px] font-normal leading-[127%] text-center px-2">
-              Sumate como <span className="font-bold">Socio Productor</span>
+              Sumate como <span className="font-bold">productor del programa</span>
             </h2>
             
             <h3 className="text-white font-display text-2xl sm:text-3xl md:text-4xl lg:text-[56px] font-normal leading-[127%] text-center px-2">

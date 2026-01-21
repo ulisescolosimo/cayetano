@@ -84,7 +84,7 @@ export default function RegisterPage() {
               Creá tu cuenta
             </h1>
             <p className="font-sans text-sm text-gray-600">
-              Unite a Proyecto 18 como Socio Productor
+              Unite a Proyecto 18 como productor del programa
             </p>
           </div>
 

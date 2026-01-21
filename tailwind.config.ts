@@ -18,6 +18,10 @@ const config: Config = {
       fontFamily: {
         display: ['var(--font-knewave)', 'cursive'],
         sans: ['var(--font-inter-tight)', 'sans-serif'],
+        // Alternativas de tipografía para títulos - para testear
+        title1: ['var(--font-bebas-neue)', 'sans-serif'], // Bebas Neue - Impactante, bold
+        title2: ['var(--font-montserrat)', 'sans-serif'], // Montserrat - Moderno, versátil
+        title3: ['var(--font-oswald)', 'sans-serif'], // Oswald - Condensed, elegante
       },
     },
   },

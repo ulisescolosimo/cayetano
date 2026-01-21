@@ -298,7 +298,7 @@ export default function JoinSection() {
                       style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
                       disabled={loading}
                     >
-                      {loading ? 'Creando cuenta...' : 'Quiero ser socio productor'}
+                      {loading ? 'Creando cuenta...' : 'Sumate como productor del programa'}
                     </Button>
                   </form>
                 </motion.div>

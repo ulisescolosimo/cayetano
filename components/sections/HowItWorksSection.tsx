@@ -51,7 +51,7 @@ export default function HowItWorksSection() {
     {
       number: 1,
       title: 'Te sumás con USD18',
-      description: 'Entrás como Socio Productor del ciclo'
+      description: 'Sumate como productor del programa'
     },
     {
       number: 2,
@@ -113,7 +113,7 @@ export default function HowItWorksSection() {
     },
     {
       question: '¿El aporte es mensual o es un pago único?',
-      answer: 'El aporte es un pago único de USD 18. No hay cuotas mensuales ni pagos recurrentes. Con ese único aporte te convertís en Socio Productor del ciclo completo de 18 entrevistas y participás en todos los sorteos durante las 18 semanas.'
+      answer: 'El aporte es un pago único de USD 18. No hay cuotas mensuales ni pagos recurrentes. Con ese único aporte te convertís en productor del programa del ciclo completo de 18 entrevistas y participás en todos los sorteos durante las 18 semanas.'
     },
     {
       question: '¿Cómo es la dinámica de los sorteos?',
@@ -199,7 +199,7 @@ export default function HowItWorksSection() {
                     Beneficios{' '}
                   </span>
                   <span className="font-sans text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-semibold lowercase" style={{ lineHeight: '94%', color: '#318CE7' }}>
-                    de ser <br/> socio-productor
+                    de ser <br/> productor del programa
                   </span>
                 </h2>
               </motion.div>

@@ -139,6 +139,12 @@ export default function Hero() {
             </motion.div>
             
             {/* Título principal */}
+            {/* OPCIONES DE TIPOGRAFÍA PARA TESTEAR TÍTULOS:
+                - Actual: font-display (Knewave)
+                - Alternativa 1: font-title1 (Bebas Neue) - Impactante y bold
+                - Alternativa 2: font-title2 (Montserrat) - Moderno y versátil  
+                - Alternativa 3: font-title3 (Oswald) - Condensed y elegante
+                Para testear, reemplazar "font-display" por "font-title1", "font-title2" o "font-title3" */}
             <motion.div 
               className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 lg:pt-8 lg:pt-12"
               variants={itemVariants}
@@ -149,27 +155,27 @@ export default function Hero() {
               </h1>
               
               <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
-                La manija es total. Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. Además, hay sorteos durante toda la temporada y un gran sorteo final: <span className="font-bold text-brand">un viaje al Mundial</span>.
+                Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. <span className="font-bold text-brand">Hay premios durante toda la temporada y un gran sorteo final: un viaje al Mundial 2026</span>.
               </p>
             </motion.div>
-            
+
             {/* Botones */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 mb-4 sm:mb-6"
+              className="flex flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 mb-4 sm:mb-6 flex-wrap"
               variants={itemVariants}
             >
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="!px-5 !py-2.5 !rounded-[13px] !font-sans !font-bold !text-base sm:!text-lg lg:!text-xl !leading-[127%] !tracking-normal w-full sm:w-auto"
+                className="!px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleJoinClick}
               >
-                Quiero ser parte
+                Aportá USD 18 y participá por el viaje al Mundial
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-5 !py-2.5 !rounded-[13px] !font-sans !font-bold !text-base sm:!text-lg lg:!text-xl !leading-[127%] !tracking-normal w-full sm:w-auto"
+                className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleMoreInfoClick}
               >
                 Más información

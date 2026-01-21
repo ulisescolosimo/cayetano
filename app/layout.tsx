@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Knewave, Inter_Tight } from 'next/font/google'
+import { Knewave, Inter_Tight, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/AuthContext'
 import UserBadge from '@/components/ui/UserBadge'
@@ -15,6 +15,28 @@ const knewave = Knewave({
 const interTight = Inter_Tight({
   subsets: ['latin'],
   variable: '--font-inter-tight',
+  display: 'swap',
+})
+
+// Alternativas de tipografía para títulos
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas-neue',
+  display: 'swap',
+})
+
+const montserrat = Montserrat({
+  weight: ['400', '600', '700', '800'],
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+})
+
+const oswald = Oswald({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-oswald',
   display: 'swap',
 })
 
@@ -47,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${knewave.variable} ${interTight.variable}`}>
+    <html lang="es" className={`${knewave.variable} ${interTight.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable}`}>
       <body>
         <AuthProvider>
           <Navigation />
