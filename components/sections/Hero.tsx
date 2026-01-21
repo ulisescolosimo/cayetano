@@ -140,7 +140,7 @@ export default function Hero() {
             
             {/* Título principal */}
             {/* OPCIONES DE TIPOGRAFÍA PARA TESTEAR TÍTULOS:
-                - Actual: font-display (Knewave)
+                - Actual: font-display (Shrikhand)
                 - Alternativa 1: font-title1 (Bebas Neue) - Impactante y bold
                 - Alternativa 2: font-title2 (Montserrat) - Moderno y versátil  
                 - Alternativa 3: font-title3 (Oswald) - Condensed y elegante

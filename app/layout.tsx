@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
-import { Knewave, Inter_Tight, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
+import { Shrikhand, Inter_Tight, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/AuthContext'
 import UserBadge from '@/components/ui/UserBadge'
 import Navigation from '@/components/ui/Navigation'
 
-const knewave = Knewave({
+const shrikhand = Shrikhand({
   weight: '400',
   subsets: ['latin'],
-  variable: '--font-knewave',
+  variable: '--font-shrikhand',
   display: 'swap',
 })
 
@@ -69,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${knewave.variable} ${interTight.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable}`}>
+    <html lang="es" className={`${shrikhand.variable} ${interTight.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable}`}>
       <body>
         <AuthProvider>
           <Navigation />

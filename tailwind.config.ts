@@ -16,7 +16,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-knewave)', 'cursive'],
+        display: ['var(--font-shrikhand)', 'cursive'],
         sans: ['var(--font-inter-tight)', 'sans-serif'],
         // Alternativas de tipografía para títulos - para testear
         title1: ['var(--font-bebas-neue)', 'sans-serif'], // Bebas Neue - Impactante, bold
