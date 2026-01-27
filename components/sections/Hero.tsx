@@ -161,21 +161,22 @@ export default function Hero() {
 
             {/* Botones */}
             <motion.div 
-              className="flex flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 mb-4 sm:mb-6 flex-wrap"
+              className="flex flex-row gap-2 sm:gap-3 mt-4 sm:mt-6 mb-4 sm:mb-6 flex-wrap sm:flex-nowrap"
               variants={itemVariants}
             >
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="!px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
+                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleJoinClick}
               >
-                Aportá USD 18 y participá por el viaje al Mundial
+                <span className="sm:hidden">Aportá USD 18</span>
+                <span className="hidden sm:inline">Aportá USD 18 y participá por el viaje al Mundial</span>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
+                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleMoreInfoClick}
               >
                 Más información

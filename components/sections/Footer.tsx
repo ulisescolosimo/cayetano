@@ -14,7 +14,7 @@ export default function Footer() {
               alt="Proyecto 18"
               width={200}
               height={50}
-              className="h-auto w-auto max-h-[50px]"
+              className="h-auto w-auto max-h-[32px] md:max-h-[50px]"
               priority
             />
           </div>
@@ -25,15 +25,15 @@ export default function Footer() {
               src="/images/rumb.png"
               alt="Rumbo al Mundial"
               width={1000}
-              height={300}
-              className="h-auto w-auto max-w-[400px] md:max-w-[700px] lg:max-w-[1100px]"
+              height={200}
+              className="h-auto w-auto max-w-[120px] md:max-w-[700px] lg:max-w-[1100px]"
               priority
             />
           </div>
 
           {/* Sección derecha: PRODUCIDO POR Orsai */}
           <div className="flex-shrink-0 flex flex-col items-center md:items-center gap-0.5">
-            <p className="font-sans font-light text-[14px] uppercase text-white leading-[105%] tracking-normal">
+            <p className="font-sans font-light text-[11px] md:text-[14px] uppercase text-white leading-[105%] tracking-normal">
               PRODUCIDO POR
             </p>
             <div className="flex items-center">
@@ -42,7 +42,7 @@ export default function Footer() {
                 alt="Orsai"
                 width={70}
                 height={40}
-                className="h-auto w-auto max-h-[35px] md:max-h-[45px]"
+                className="h-auto w-auto max-h-[24px] md:max-h-[45px]"
                 priority
               />
             </div>
