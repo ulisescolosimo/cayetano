@@ -17,6 +17,23 @@
     @apply font-sans antialiased;
   }
 
+  /* Enfoque visible para navegación por teclado (accesibilidad) */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Ajuste para sidebar lateral - no necesitamos scroll-margin-top */
   section[id] {
     scroll-margin-top: 0;

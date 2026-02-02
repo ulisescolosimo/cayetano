@@ -43,8 +43,10 @@ export default function HowItWorksSection() {
     if (!user && !loading) {
       router.push('/login')
     } else if (user) {
-      // Aquí puedes agregar la lógica para cuando el usuario está logueado
-      console.log('Usuario autenticado, proceder con el proceso')
+      const element = document.getElementById('sumate')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }
   const steps = [
@@ -291,7 +293,10 @@ export default function HowItWorksSection() {
 
               {/* Lista de preguntas */}
               <div className="space-y-3 sm:space-y-4 md:space-y-5">
-                {faqs.map((faq, index) => (
+                {faqs.map((faq, index) => {
+                  const answerId = `faq-answer-${index}`
+                  const isOpen = openFaq === index
+                  return (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -300,25 +305,33 @@ export default function HowItWorksSection() {
                     className="paper-texture rounded-[12px] sm:rounded-[16px] relative overflow-hidden"
                   >
                     <button
+                      type="button"
                       onClick={() => toggleFaq(index)}
-                      className="w-full p-3 sm:p-4 md:p-5 lg:p-6 text-left flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer"
+                      aria-expanded={isOpen}
+                      aria-controls={answerId}
+                      id={`faq-question-${index}`}
+                      className="w-full p-3 sm:p-4 md:p-5 lg:p-6 text-left flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded-[12px] sm:rounded-[16px]"
                     >
                       <h3 className="font-sans text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-bold text-white text-left flex-1 relative z-10" style={{ lineHeight: '94%' }}>
                         {faq.question}
                       </h3>
                       <svg
-                        className={`w-5 h-5 sm:w-6 sm:h-6 text-white transition-transform duration-300 flex-shrink-0 mt-1 sm:mt-0 ${openFaq === index ? 'rotate-180' : ''}`}
+                        className={`w-5 h-5 sm:w-6 sm:h-6 text-white transition-transform duration-300 flex-shrink-0 mt-1 sm:mt-0 ${isOpen ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                         style={{ color: 'white' }}
+                        aria-hidden
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
                     <div
+                      id={answerId}
+                      role="region"
+                      aria-labelledby={`faq-question-${index}`}
                       className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        openFaq === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                        isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                       }`}
                     >
                       <div className="px-3 sm:px-4 md:px-5 lg:px-6 pb-3 sm:pb-4 md:pb-5 lg:pb-6 pt-0">
@@ -328,7 +341,8 @@ export default function HowItWorksSection() {
                       </div>
                     </div>
                   </motion.div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </div>

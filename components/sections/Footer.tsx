@@ -26,7 +26,7 @@ export default function Footer() {
               alt="Rumbo al Mundial"
               width={1000}
               height={200}
-              className="h-auto w-auto max-w-[120px] md:max-w-[700px] lg:max-w-[1100px]"
+              className="h-auto w-auto max-w-[120px] sm:max-w-[400px] md:max-w-[700px] lg:max-w-[1100px]"
               priority
             />
           </div>

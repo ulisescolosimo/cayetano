@@ -14,9 +14,10 @@ export default function Hero() {
     if (!user && !loading) {
       router.push('/login')
     } else if (user) {
-      // Aquí puedes agregar la lógica para cuando el usuario está logueado
-      // Por ejemplo, redirigir a una página de pago o dashboard
-      console.log('Usuario autenticado, proceder con el proceso')
+      const element = document.getElementById('sumate')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }
 

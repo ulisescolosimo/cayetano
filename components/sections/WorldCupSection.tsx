@@ -17,8 +17,10 @@ export default function WorldCupSection() {
     if (!user && !loading) {
       router.push('/login')
     } else if (user) {
-      // Aquí puedes agregar la lógica para cuando el usuario está logueado
-      console.log('Usuario autenticado, proceder con el proceso')
+      const element = document.getElementById('sumate')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
   }
 
