@@ -151,8 +151,8 @@ export default function Hero() {
               variants={itemVariants}
             >
               <h1 className="leading-none">
-                <span className="text-gray-800 font-sans font-bold text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] block">Rumbo al</span>
-                <span className="text-brand font-display font-normal text-[52px] sm:text-[72px] md:text-[96px] lg:text-[120px] block -mt-1 sm:-mt-2">Mundial</span>
+                <span className="text-gray-800 font-sans font-bold text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] block">La previa</span>
+                <span className="text-brand font-display font-normal text-[52px] sm:text-[72px] md:text-[96px] lg:text-[120px] block -mt-1 sm:-mt-2">de la copa</span>
               </h1>
               
               <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">

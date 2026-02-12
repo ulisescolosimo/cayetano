@@ -19,11 +19,11 @@ export default function Footer() {
             />
           </div>
 
-          {/* Sección central: Rumbo al Mundial (imagen) */}
+          {/* Sección central: La previa de la copa (imagen) */}
           <div className="flex-1 flex items-center justify-center">
             <Image
               src="/images/rumb.png"
-              alt="Rumbo al Mundial"
+              alt="La previa de la copa"
               width={1000}
               height={200}
               className="h-auto w-auto max-w-[120px] sm:max-w-[400px] md:max-w-[700px] lg:max-w-[1100px]"

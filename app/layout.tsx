@@ -41,19 +41,19 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: 'Proyecto 18 - Rumbo al mundial',
+  title: 'Proyecto 18 - La previa de la copa',
   description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol: 18 hinchas viajando al Mundial 2026.',
   keywords: ['Mundial 2026', 'Proyecto 18', 'fútbol', 'hinchas', 'viaje al mundial', 'Argentina'],
   authors: [{ name: 'Proyecto 18' }],
   openGraph: {
-    title: 'Proyecto 18 - Rumbo al mundial',
+    title: 'Proyecto 18 - La previa de la copa',
     description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
     type: 'website',
     locale: 'es_AR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Proyecto 18 - Rumbo al mundial',
+    title: 'Proyecto 18 - La previa de la copa',
     description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
   },
   icons: {
