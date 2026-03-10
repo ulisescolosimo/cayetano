@@ -115,15 +115,15 @@ export default function HowItWorksSection() {
     },
     {
       question: '¿El aporte es mensual o es un pago único?',
-      answer: 'El aporte es un pago único de USD 18. No hay cuotas mensuales ni pagos recurrentes. Con ese único aporte te convertís en productor del programa del ciclo completo de 18 entrevistas y participás en todos los sorteos durante las 18 semanas.'
+      answer: 'El aporte es un pago único de USD 18. No hay cuotas mensuales ni pagos recurrentes. Con ese único aporte te convertís en productor del programa del ciclo completo de 18 entrevistas y participás en todos los sorteos durante las 18 entrevistas.'
     },
     {
       question: '¿Cómo es la dinámica de los sorteos?',
-      answer: 'Los sorteos se realizan durante cada entrevista y también hay sorteos especiales a lo largo de las 18 semanas. Todo lo que se consiga del proyecto (premios, regalos de marcas aliadas, etc.) se sortea entre los socios-productores. La dinámica es transparente y todos tienen las mismas oportunidades de ganar.'
+      answer: 'Los sorteos se realizan durante cada entrevista y también hay sorteos especiales a lo largo de las 18 entrevistas. Todo lo que se consiga del proyecto (premios, regalos de marcas aliadas, etc.) se sortea entre los socios-productores. La dinámica es transparente y todos tienen las mismas oportunidades de ganar.'
     },
     {
       question: '¿Cómo funciona el Gran Premio del viaje al Mundial 2026?',
-      answer: 'El Gran Premio es el sorteo final del proyecto. Entre todos los socios-productores que hayan participado durante las 18 semanas, se sorteará el viaje a la primera ronda del Mundial 2026. El ganador será seleccionado de forma aleatoria y transparente entre todos los socios del proyecto.'
+      answer: 'El Gran Premio es el sorteo final del proyecto. Entre todos los socios-productores que hayan participado durante las 18 entrevistas, se sorteará el viaje a la primera ronda del Mundial 2026. El ganador será seleccionado de forma aleatoria y transparente entre todos los socios del proyecto.'
     }
   ]
 
