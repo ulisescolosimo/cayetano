@@ -57,7 +57,7 @@ export default function HowItWorksSection() {
     },
     {
       number: 2,
-      title: '18 entrevistas en 18 semanas',
+      title: '18 entrevistas',
       description: 'Algunas grabadas en locaciones especiales y otras en vivo en Paseo la Plaza - Sala Casals'
     },
     {
@@ -73,7 +73,7 @@ export default function HowItWorksSection() {
     {
       number: 5,
       title: 'El gran premio final',
-      description: 'El más afortunado de nosotros viaja a la primera ronda del mundial.'
+      description: 'Cuantos más seamos, más chances tenemos de que uno viaje al Mundial.'
     }
   ]
 

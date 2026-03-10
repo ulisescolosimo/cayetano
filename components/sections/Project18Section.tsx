@@ -62,7 +62,7 @@ export default function Project18Section() {
             {/* Título principal */}
             <div className="mb-4 sm:mb-5 md:mb-6">
               <h2 className="font-display text-[20px] sm:text-[24px] md:text-[24px] lg:text-[28px] font-normal leading-[109%]" style={{ color: '#3F3F3F' }}>
-                18 entrevistas. 18 semanas. <span className="text-brand italic">1 pasión.</span> Producido por los <span className="text-brand italic">hinchas, para el mundo</span>
+                18 entrevistas. <span className="text-brand italic">1 pasión.</span> Producido por los <span className="text-brand italic">hinchas, para el mundo</span>
               </h2>
             </div>
 

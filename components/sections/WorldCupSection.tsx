@@ -176,7 +176,7 @@ export default function WorldCupSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-white font-sans text-sm sm:text-base md:text-lg lg:text-[32px] font-normal leading-relaxed lg:leading-[150%] text-center max-w-5xl px-4"
           >
-            Durante 18 semanas co-diseñás junto a Cayetano 18 entrevistas en vivo. Vos proponés temas, votás preguntas y ayudás a armar el guion. <span className="font-bold">Acá la audiencia no mira: produce.</span>
+            Co-diseñás junto a Cayetano 18 entrevistas grabadas. Vos proponés temas, votás preguntas y ayudás a armar el guion. <span className="font-bold">Acá la audiencia no mira: produce.</span>
           </motion.p>
 
           {/* Botón */}

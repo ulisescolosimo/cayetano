@@ -156,7 +156,7 @@ export default function Hero() {
               </h1>
               
               <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
-                Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. <span className="font-bold text-brand">Hay premios durante toda la temporada y un gran sorteo final: un viaje al Mundial 2026</span>.
+                Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. <span className="font-bold text-brand">Hay premios durante todo el ciclo y un gran sorteo final: soñamos con viajar al Mundial 2026</span>.
               </p>
             </motion.div>
 
@@ -172,7 +172,7 @@ export default function Hero() {
                 onClick={handleJoinClick}
               >
                 <span className="sm:hidden">Aportá USD 18</span>
-                <span className="hidden sm:inline">Aportá USD 18 y participá por el viaje al Mundial</span>
+                <span className="hidden sm:inline">Aportá USD 18 y participá</span>
               </Button>
               <Button 
                 variant="outline" 
