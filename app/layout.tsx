@@ -41,27 +41,52 @@ const oswald = Oswald({
   display: 'swap',
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, '') || 'https://proyecto18.orsai.app'
+
 export const metadata: Metadata = {
-  title: 'Proyecto 18 - La previa de la copa',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Proyecto 18 - La previa de la copa',
+    template: '%s | Proyecto 18',
+  },
   description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol: 18 hinchas viajando al Mundial 2026.',
-  keywords: ['Mundial 2026', 'Proyecto 18', 'fútbol', 'hinchas', 'viaje al mundial', 'Argentina'],
-  authors: [{ name: 'Proyecto 18' }],
+  keywords: ['Mundial 2026', 'Proyecto 18', 'fútbol', 'hinchas', 'viaje al mundial', 'Argentina', 'Copa América', 'hinchada'],
+  authors: [{ name: 'Proyecto 18', url: siteUrl }],
+  creator: 'Proyecto 18',
+  publisher: 'Proyecto 18',
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     title: 'Proyecto 18 - La previa de la copa',
-    description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
+    description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol: 18 hinchas viajando al Mundial 2026.',
     type: 'website',
     locale: 'es_AR',
+    url: siteUrl,
+    siteName: 'Proyecto 18',
+    images: [{ url: '/images/favicon p18.png', width: 512, height: 512, alt: 'Proyecto 18' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Proyecto 18 - La previa de la copa',
     description: 'La previa la hacemos nosotros. Unite al proyecto más ambicioso del fútbol.',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   icons: {
     icon: '/images/favicon p18.png',
     shortcut: '/images/favicon p18.png',
     apple: '/images/favicon p18.png',
   },
+  alternates: { canonical: siteUrl },
+  category: 'sports',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1a1a1a',
 }
 
 export default function RootLayout({

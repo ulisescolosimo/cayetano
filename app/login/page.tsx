@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams()
   const [email, setEmail] = useState(searchParams.get('email') ?? '')
   const [password, setPassword] = useState('')
@@ -183,6 +183,18 @@ export default function LoginPage() {
         </div>
       </motion.div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="w-10 h-10 border-4 border-[#318CE7] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }
 

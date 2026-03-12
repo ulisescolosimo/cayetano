@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [email, setEmail] = useState(searchParams.get('email') ?? '')
@@ -214,6 +214,18 @@ export default function RegisterPage() {
       </div>
       )}
     </>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <RegisterForm />
+    </Suspense>
   )
 }
 
