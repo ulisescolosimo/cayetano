@@ -3,17 +3,6 @@ import { createSupabaseAdmin } from '@/lib/supabase/admin'
 
 const MP_PAYMENTS_URL = 'https://api.mercadopago.com/v1/payments'
 
-/**
- * Webhook de MercadoPago (IPN / notificaciones).
- * URL a configurar: https://offish-alverta-unbusily.ngrok-free.dev/api/webhooks/mercadopago
- *
- * MercadoPago puede enviar:
- * - GET ?topic=payment&id=<payment_id>
- * - POST application/json { "topic": "payment", "resource": "<payment_id>" }
- *
- * Ante cualquier notificación respondemos 200 para que MP no reintente.
- * Si topic=payment, consultamos el pago en MP y, si está aprobado, actualizamos nuestra tabla payments.
- */
 export async function GET(request: NextRequest) {
   const topic = request.nextUrl.searchParams.get('topic')
   const id = request.nextUrl.searchParams.get('id')
