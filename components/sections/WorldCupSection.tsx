@@ -3,25 +3,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
-import { useAuth } from '@/context/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useCheckoutModal } from '@/context/CheckoutModalContext'
 
 export default function WorldCupSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const { user, loading } = useAuth()
-  const router = useRouter()
+  const { openCheckoutModal } = useCheckoutModal()
 
   const handleJoinClick = () => {
-    if (!user && !loading) {
-      router.push('/login')
-    } else if (user) {
-      const element = document.getElementById('sumate')
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
+    openCheckoutModal()
   }
 
   useEffect(() => {

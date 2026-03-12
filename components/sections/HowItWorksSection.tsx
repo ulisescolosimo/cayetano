@@ -4,15 +4,13 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
-import { useAuth } from '@/context/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useCheckoutModal } from '@/context/CheckoutModalContext'
 
 export default function HowItWorksSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLElement>(null)
-  const { user, loading } = useAuth()
-  const router = useRouter()
+  const { openCheckoutModal } = useCheckoutModal()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,20 +38,13 @@ export default function HowItWorksSection() {
   }
 
   const handleJoinClick = () => {
-    if (!user && !loading) {
-      router.push('/login')
-    } else if (user) {
-      const element = document.getElementById('sumate')
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
+    openCheckoutModal()
   }
   const steps = [
     {
       number: 1,
       title: 'Te sumás con USD18',
-      description: 'Sumate como productor del programa'
+      description: 'Sumate como productor y participá de los grupos de debate'
     },
     {
       number: 2,
@@ -80,11 +71,11 @@ export default function HowItWorksSection() {
   const benefits = [
     {
       title: 'Ser co-productor',
-      description: 'Tus preguntas pueden quedar en el guion y salir al aire.'
+      description: 'TTus preguntas pueden quedar seleccionadas para los guiones de las entrevistas.'
     },
     {
       title: 'Somos una comunidad',
-      description: 'Los objetivos los cumplimos juntos.'
+      description: 'Los objetivos los cumplimos juntos. Las entrevistas las pensamos entre todos.'
     },
     {
       title: 'Estamos asociados',
@@ -123,7 +114,7 @@ export default function HowItWorksSection() {
     },
     {
       question: '¿Cómo funciona el Gran Premio del viaje al Mundial 2026?',
-      answer: 'El Gran Premio es el sorteo final del proyecto. Entre todos los productores que hayan participado durante las 18 entrevistas, se sorteará el viaje a la primera ronda del Mundial 2026. El ganador será seleccionado de forma aleatoria y transparente entre todos los productores del proyecto.'
+      answer: 'El camino de las 18 entrevistas tiene una meta soñada: el Gran Premio. Mantenemos viva la expectativa de culminar este ciclo sorteando un viaje al Mundial 2026 entre nuestra comunidad de productores. Es el cierre que todos deseamos para premiar el compromiso con el proyecto y, cuantos más seamos, más cerca estaremos de concretarlo y más chances tendremos de que ese sueño se haga realidad.'
     }
   ]
 

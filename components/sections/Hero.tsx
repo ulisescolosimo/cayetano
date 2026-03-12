@@ -3,22 +3,13 @@
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { motion } from 'framer-motion'
-import { useAuth } from '@/context/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useCheckoutModal } from '@/context/CheckoutModalContext'
 
 export default function Hero() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
+  const { openCheckoutModal } = useCheckoutModal()
 
   const handleJoinClick = () => {
-    if (!user && !loading) {
-      router.push('/login')
-    } else if (user) {
-      const element = document.getElementById('sumate')
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
+    openCheckoutModal()
   }
 
   // Variantes de animación
@@ -151,11 +142,11 @@ export default function Hero() {
               variants={itemVariants}
             >
               <h1 className="leading-none">
-                <span className="text-gray-800 font-sans font-bold text-[40px] sm:text-[56px] md:text-[72px] lg:text-[88px] block">La previa</span>
-                <span className="text-brand font-display font-normal text-[52px] sm:text-[72px] md:text-[96px] lg:text-[120px] block -mt-1 sm:-mt-2">de la copa</span>
+                <span className="text-gray-800 font-sans font-bold text-[40px] sm:text-[56px] md:text-[72px] lg:text-[72px] xl:text-[88px] block">La previa</span>
+                <span className="text-brand font-display font-normal text-[52px] sm:text-[72px] md:text-[96px] lg:text-[96px] xl:text-[120px] block -mt-1 sm:-mt-2">de la copa</span>
               </h1>
               
-              <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
+              <p className="text-base sm:text-xl md:text-2xl lg:text-[22px] xl:text-[22px] font-sans font-normal leading-[127%] tracking-normal text-gray-700 max-w-xl">
                 Aportando 18 dólares podés ser parte de las entrevistas que van a calentar la previa del Mundial 2026. <span className="font-bold text-brand">Hay premios durante todo el ciclo y un gran sorteo final: soñamos con viajar al Mundial 2026</span>.
               </p>
             </motion.div>
@@ -207,7 +198,7 @@ export default function Hero() {
                   />
                 </div>
               </div>
-              <p className="text-base sm:text-lg md:text-xl lg:text-[24px] font-sans leading-[140%] tracking-normal text-gray-600">
+              <p className="text-base sm:text-lg md:text-xl lg:text-[22px] xl:text-[24px] font-sans leading-[140%] tracking-normal text-gray-600">
                 <span className="font-light block">Una idea original de</span>
                 <span className="font-semibold block -mt-1">Hernán Casciari y Cayetano</span>
               </p>

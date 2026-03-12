@@ -18,6 +18,18 @@ interface TimeLeft {
   seconds: number
 }
 
+interface MiPago {
+  id: string
+  status: string
+  email: string
+  amount_usd: number
+  amount_total: number
+  currency_id: string
+  dolar_rate_used: number | null
+  created_at: string
+  payment_id: string | null
+}
+
 export default function MembersPage() {
   const { user, loading } = useAuth()
   const { profile, loading: profileLoading, isProfileComplete } = useProfile(user)
@@ -29,6 +41,9 @@ export default function MembersPage() {
     seconds: 0,
   })
   const [isVisible, setIsVisible] = useState(false)
+  const [miPago, setMiPago] = useState<MiPago | null>(null)
+  const [paymentLoading, setPaymentLoading] = useState(true)
+  const [paymentError, setPaymentError] = useState<string | null>(null)
 
   // Proteger la ruta - redirigir si no está autenticado
   useEffect(() => {
@@ -36,6 +51,29 @@ export default function MembersPage() {
       router.push('/login')
     }
   }, [user, loading, router])
+
+  // Obtener detalle del pago del usuario (tiene pago aprobado si llegó a miembros)
+  useEffect(() => {
+    if (!user) return
+    let cancelled = false
+    setPaymentLoading(true)
+    setPaymentError(null)
+    fetch('/api/miembros/mi-pago', { credentials: 'include' })
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status === 404 ? 'Sin pago' : 'Error al cargar')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) setMiPago(data)
+      })
+      .catch((err) => {
+        if (!cancelled) setPaymentError(err.message)
+      })
+      .finally(() => {
+        if (!cancelled) setPaymentLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [user])
 
   // Calcular tiempo restante
   useEffect(() => {
@@ -173,6 +211,72 @@ export default function MembersPage() {
                       Segundos
                     </div>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Detalle de mi pago */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="w-full max-w-2xl px-4"
+            >
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand/30 to-brand/10 rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative bg-gray-800/80 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-gray-700/50 shadow-xl hover:border-brand/50 transition-all duration-300 text-left">
+                  <h2 className="text-white font-display text-xl sm:text-2xl font-normal mb-6">
+                    Detalle de mi pago
+                  </h2>
+                  {paymentLoading && (
+                    <div className="flex items-center gap-3 text-gray-400 font-sans">
+                      <div className="w-5 h-5 border-2 border-brand border-t-transparent rounded-full animate-spin" />
+                      <span>Cargando...</span>
+                    </div>
+                  )}
+                  {!paymentLoading && paymentError && (
+                    <p className="text-gray-400 font-sans">{paymentError}</p>
+                  )}
+                  {!paymentLoading && miPago && (
+                    <dl className="space-y-4 font-sans">
+                      <div className="flex justify-between items-baseline gap-4">
+                        <dt className="text-gray-400">Estado</dt>
+                        <dd className="text-white font-medium">
+                          {miPago.status === 'approved' ? 'Aprobado' : miPago.status}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between items-baseline gap-4">
+                        <dt className="text-gray-400">Aporte</dt>
+                        <dd className="text-white font-medium">
+                          USD {Number(miPago.amount_usd).toLocaleString('es-AR')}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between items-baseline gap-4">
+                        <dt className="text-gray-400">Pagado</dt>
+                        <dd className="text-white font-medium">
+                          {miPago.currency_id} {Number(miPago.amount_total).toLocaleString('es-AR')}
+                        </dd>
+                      </div>
+                      {miPago.dolar_rate_used != null && (
+                        <div className="flex justify-between items-baseline gap-4">
+                          <dt className="text-gray-400">Tipo de cambio usado</dt>
+                          <dd className="text-white font-medium">
+                            {Number(miPago.dolar_rate_used).toLocaleString('es-AR')} {miPago.currency_id}/USD
+                          </dd>
+                        </div>
+                      )}
+                      <div className="flex justify-between items-baseline gap-4">
+                        <dt className="text-gray-400">Fecha</dt>
+                        <dd className="text-white font-medium">
+                          {new Date(miPago.created_at).toLocaleDateString('es-AR', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                          })}
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
                 </div>
               </div>
             </motion.div>

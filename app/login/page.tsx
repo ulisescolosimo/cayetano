@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
 import Link from 'next/link'
@@ -10,7 +10,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
+  const searchParams = useSearchParams()
+  const [email, setEmail] = useState(searchParams.get('email') ?? '')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -156,15 +157,16 @@ export default function LoginPage() {
               </Button>
             </div>
 
-            <div className="text-center pt-2">
+            <div className="text-center pt-2 space-y-3">
               <p className="font-sans text-xs text-gray-600">
-                ¿No tenés cuenta?{' '}
+                ¿Pagaste pero no pudiste completar tu cuenta? Usá el mismo correo que en MercadoPago y{' '}
                 <Link
-                  href="/register"
+                  href={email ? `/register?postpago=1&email=${encodeURIComponent(email)}` : '/register?postpago=1'}
                   className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors"
                 >
-                  Creá una cuenta
+                  creala acá
                 </Link>
+                .
               </p>
             </div>
           </form>

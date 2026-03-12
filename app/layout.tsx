@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Shrikhand, Inter_Tight, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/AuthContext'
+import { CheckoutModalProvider } from '@/context/CheckoutModalContext'
 import UserBadge from '@/components/ui/UserBadge'
 import Navigation from '@/components/ui/Navigation'
 
@@ -78,9 +79,11 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <AuthProvider>
-          <Navigation />
-          <UserBadge />
-          {children}
+          <CheckoutModalProvider>
+            <Navigation />
+            <UserBadge />
+            {children}
+          </CheckoutModalProvider>
         </AuthProvider>
       </body>
     </html>

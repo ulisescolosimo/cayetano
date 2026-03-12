@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase/client'
 import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
 import Link from 'next/link'
@@ -10,12 +10,23 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState('')
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [email, setEmail] = useState(searchParams.get('email') ?? '')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
+  const [canShowForm, setCanShowForm] = useState(false)
+
+  // Solo permitir registro si vino desde login/post-pago (evitar registro sin pagar)
+  useEffect(() => {
+    if (searchParams.get('postpago') === '1') {
+      setCanShowForm(true)
+    } else {
+      router.replace('/#sumate')
+    }
+  }, [searchParams, router])
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -52,6 +63,13 @@ export default function RegisterPage() {
   }
 
   return (
+    <>
+      {!canShowForm && (
+        <div className="min-h-screen flex items-center justify-center bg-white">
+          <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+      {canShowForm && (
     <div className="min-h-screen relative flex items-center justify-center bg-white overflow-hidden py-8">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -193,7 +211,9 @@ export default function RegisterPage() {
           </Link>
         </div>
       </motion.div>
-    </div>
+      </div>
+      )}
+    </>
   )
 }
 

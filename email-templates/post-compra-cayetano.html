@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu aporte a Proyecto 18</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f4f5; color: #1f2937;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f4f5; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 560px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); overflow: hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); padding: 32px 40px; text-align: center;">
+              <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #ffffff; letter-spacing: -0.02em;">
+                Proyecto 18
+              </h1>
+              <p style="margin: 8px 0 0; font-size: 14px; color: #9ca3af;">
+                La previa de la copa
+              </p>
+            </td>
+          </tr>
+          <!-- Contenido -->
+          <tr>
+            <td style="padding: 40px;">
+              <p style="margin: 0 0 24px; font-size: 18px; color: #1f2937; line-height: 1.5;">
+                ¡Gracias por tu aporte! Ya sos parte del equipo que produce la previa del Mundial 2026.
+              </p>
+              <p style="margin: 0 0 24px; font-size: 16px; color: #4b5563; line-height: 1.6;">
+                Resumen de tu compra:
+              </p>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #e5e7eb; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 16px 20px; border-bottom: 1px solid #e5e7eb; font-size: 14px; color: #6b7280;">Aporte</td>
+                  <td style="padding: 16px 20px; border-bottom: 1px solid #e5e7eb; font-size: 14px; color: #1f2937; text-align: right; font-weight: 600;">USD {{ $json.amount_usd }}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 16px 20px; border-bottom: 1px solid #e5e7eb; font-size: 14px; color: #6b7280;">Pagado</td>
+                  <td style="padding: 16px 20px; border-bottom: 1px solid #e5e7eb; font-size: 14px; color: #1f2937; text-align: right; font-weight: 600;">{{ $json.currency_id }} {{ $json.amount_total }}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 16px 20px; font-size: 14px; color: #6b7280;">Fecha</td>
+                  <td style="padding: 16px 20px; font-size: 14px; color: #1f2937; text-align: right;">{{ $json.created_at }}</td>
+                </tr>
+              </table>
+              <p style="margin: 24px 0 0; font-size: 15px; color: #4b5563; line-height: 1.6;">
+                Creá tu cuenta con el mismo correo (<strong>{{ $json.email }}</strong>) para acceder a la zona de miembros, participar en las entrevistas y estar en los sorteos.
+              </p>
+              <table role="presentation" cellspacing="0" cellpadding="0" style="margin-top: 32px;">
+                <tr>
+                  <td style="border-radius: 8px; background-color: #1f2937;">
+                    <a href="{{ $env.NEXT_PUBLIC_APP_URL || 'https://proyecto18.orsai.app' }}/register" target="_blank" rel="noopener" style="display: inline-block; padding: 14px 28px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none;">
+                      Ir a crear cuenta / Miembros
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; text-align: center;">
+              <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+                Producido por Orsai · Proyecto 18
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

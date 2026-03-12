@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/context/AuthContext'
+import { useCheckoutModal } from '@/context/CheckoutModalContext'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
@@ -53,7 +54,7 @@ const MembersIcon = ({ className }: { className?: string }) => (
 const navItems: NavItem[] = [
   { label: 'Inicio', href: '#hero', id: 'hero', icon: <HomeIcon /> },
   { label: 'El Proyecto', href: '#proyecto', id: 'proyecto', icon: <ProjectIcon /> },
-  { label: 'Cómo Funciona', href: '#como-funciona', id: 'como-funciona', icon: <HowItWorksIcon /> },
+  { label: 'C?mo Funciona', href: '#como-funciona', id: 'como-funciona', icon: <HowItWorksIcon /> },
   { label: 'Sumate', href: '#sumate', id: 'sumate', icon: <JoinIcon /> },
 ]
 
@@ -62,13 +63,14 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('hero')
   const [isHovered, setIsHovered] = useState(false)
   const { user, loading } = useAuth()
+  const { openCheckoutModal } = useCheckoutModal()
   const router = useRouter()
   const pathname = usePathname()
 
-  // Determinar si estamos en la página de miembros
+  // Determinar si estamos en la p?gina de miembros
   const isMembersPage = pathname === '/miembros'
 
-  // Detectar sección activa al hacer scroll - solo si NO estamos en la página de miembros
+  // Detectar secci?n activa al hacer scroll - solo si NO estamos en la p?gina de miembros
   useEffect(() => {
     if (isMembersPage) return
 
@@ -113,21 +115,8 @@ export default function Navigation() {
     setIsMobileMenuOpen(false)
   }
 
-  const handleJoinClick = () => {
-    if (!user && !loading) {
-      router.push('/login')
-    } else if (user) {
-      const element = document.getElementById('sumate')
-      if (element) {
-        const offset = 80
-        const elementPosition = element.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - offset
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
-      }
-    }
+  const handleSumateClick = () => {
+    openCheckoutModal()
     setIsMobileMenuOpen(false)
   }
 
@@ -146,7 +135,7 @@ export default function Navigation() {
     setIsMobileMenuOpen(false)
   }
 
-  // No mostrar en páginas de login/register
+  // No mostrar en p?ginas de login/register
   if (pathname === '/login' || pathname === '/register') {
     return null
   }
@@ -172,9 +161,9 @@ export default function Navigation() {
             className="bg-white/80 backdrop-blur-sm shadow-lg rounded-l-2xl border-l border-t border-b border-gray-200/50 overflow-hidden"
           >
             <div className="flex flex-col items-center py-4">
-              {/* Items de navegación */}
+              {/* Items de navegaci?n */}
               <div className="flex flex-col gap-2 w-full px-2">
-                {/* Items del home - solo si NO estamos en la página de miembros */}
+                {/* Items del home - solo si NO estamos en la p?gina de miembros */}
                 {!isMembersPage && navItems.map((item, index) => {
                   const isActive = activeSection === item.id
                   const isSumate = item.id === 'sumate'
@@ -184,7 +173,7 @@ export default function Navigation() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.1 + index * 0.05 }}
-                      onClick={(e) => handleNavClick(e, item.href)}
+                      onClick={(e) => isSumate ? handleSumateClick() : handleNavClick(e, item.href)}
                       className={`relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 ${
                         isSumate
                           ? 'bg-brand text-white shadow-md hover:bg-brand-dark'
@@ -193,7 +182,7 @@ export default function Navigation() {
                           : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                       }`}
                     >
-                      {/* Indicador activo - línea vertical */}
+                      {/* Indicador activo - l?nea vertical */}
                       {isActive && !isSumate && (
                         <motion.div
                           layoutId="activeIndicator"
@@ -215,7 +204,7 @@ export default function Navigation() {
                         {item.icon}
                       </motion.div>
                       
-                      {/* Texto - solo visible cuando está desplegado */}
+                      {/* Texto - solo visible cuando est? desplegado */}
                       <motion.span
                         animate={{
                           opacity: isHovered ? 1 : 0,
@@ -233,7 +222,7 @@ export default function Navigation() {
                   )
                 })}
 
-                {/* Botón para volver al home - solo si estamos en la página de miembros */}
+                {/* Bot?n para volver al home - solo si estamos en la p?gina de miembros */}
                 {isMembersPage && (
                   <motion.button
                     initial={{ opacity: 0 }}
@@ -253,7 +242,7 @@ export default function Navigation() {
                       <HomeIcon />
                     </motion.div>
                     
-                    {/* Texto - solo visible cuando está desplegado */}
+                    {/* Texto - solo visible cuando est? desplegado */}
                     <motion.span
                       animate={{
                         opacity: isHovered ? 1 : 0,
@@ -268,7 +257,7 @@ export default function Navigation() {
                   </motion.button>
                 )}
                 
-                {/* Botón de Miembros - solo si está autenticado y NO estamos en la página de miembros */}
+                {/* Bot?n de Miembros - solo si est? autenticado y NO estamos en la p?gina de miembros */}
                 {user && !loading && !isMembersPage && (
                   <motion.button
                     initial={{ opacity: 0 }}
@@ -288,7 +277,7 @@ export default function Navigation() {
                       <MembersIcon />
                     </motion.div>
                     
-                    {/* Texto - solo visible cuando está desplegado */}
+                    {/* Texto - solo visible cuando est? desplegado */}
                     <motion.span
                       animate={{
                         opacity: isHovered ? 1 : 0,
@@ -303,7 +292,7 @@ export default function Navigation() {
                   </motion.button>
                 )}
 
-                {/* Botón de Miembros activo - solo si estamos en la página de miembros */}
+                {/* Bot?n de Miembros activo - solo si estamos en la p?gina de miembros */}
                 {isMembersPage && (
                   <motion.button
                     initial={{ opacity: 0 }}
@@ -311,7 +300,7 @@ export default function Navigation() {
                     transition={{ delay: 0.1 }}
                     className="relative group flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200 bg-brand/10 text-brand"
                   >
-                    {/* Indicador activo - línea vertical */}
+                    {/* Indicador activo - l?nea vertical */}
                     <motion.div
                       layoutId="activeIndicator"
                       className="absolute left-0 top-0 bottom-0 w-1 bg-brand rounded-r-full"
@@ -329,7 +318,7 @@ export default function Navigation() {
                       <MembersIcon />
                     </motion.div>
                     
-                    {/* Texto - solo visible cuando está desplegado */}
+                    {/* Texto - solo visible cuando est? desplegado */}
                     <motion.span
                       animate={{
                         opacity: isHovered ? 1 : 0,
@@ -344,7 +333,7 @@ export default function Navigation() {
                   </motion.button>
                 )}
 
-                {/* Botón de Login - solo si no está autenticado */}
+                {/* Bot?n de Login - solo si no est? autenticado */}
                 {!user && !loading && (
                   <motion.button
                     initial={{ opacity: 0 }}
@@ -364,7 +353,7 @@ export default function Navigation() {
                       <LoginIcon />
                     </motion.div>
                     
-                    {/* Texto - solo visible cuando está desplegado */}
+                    {/* Texto - solo visible cuando est? desplegado */}
                     <motion.span
                       animate={{
                         opacity: isHovered ? 1 : 0,
@@ -374,7 +363,7 @@ export default function Navigation() {
                       transition={{ duration: 0.2 }}
                       className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden"
                     >
-                      Iniciar sesión
+                      Iniciar sesi?n
                     </motion.span>
                   </motion.button>
                 )}
@@ -384,7 +373,7 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile - Botón flotante */}
+      {/* Mobile - Bot?n flotante */}
       <div className="lg:hidden fixed bottom-6 right-6 z-50">
         <motion.button
           initial={{ scale: 0 }}
@@ -435,7 +424,7 @@ export default function Navigation() {
               <div className="p-6 h-full flex flex-col">
                 {/* Header del drawer */}
                 <div className="flex items-center justify-between mb-8">
-                  <h2 className="font-sans font-bold text-lg text-gray-800">Menú</h2>
+                  <h2 className="font-sans font-bold text-lg text-gray-800">Men?</h2>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 text-gray-600 hover:text-brand transition-colors"
@@ -446,9 +435,9 @@ export default function Navigation() {
                   </button>
                 </div>
 
-                {/* Items de navegación */}
+                {/* Items de navegaci?n */}
                 <div className="flex flex-col gap-2 flex-1">
-                  {/* Items del home - solo si NO estamos en la página de miembros */}
+                  {/* Items del home - solo si NO estamos en la p?gina de miembros */}
                   {!isMembersPage && navItems.map((item, index) => {
                     const isActive = activeSection === item.id
                     const isSumate = item.id === 'sumate'
@@ -458,7 +447,7 @@ export default function Navigation() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        onClick={(e) => handleNavClick(e, item.href)}
+                        onClick={(e) => isSumate ? handleSumateClick() : handleNavClick(e, item.href)}
                         className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-200 text-left ${
                           isSumate
                             ? 'bg-brand text-white shadow-lg font-semibold'
@@ -485,7 +474,7 @@ export default function Navigation() {
                     )
                   })}
 
-                  {/* Botón para volver al home - solo si estamos en la página de miembros */}
+                  {/* Bot?n para volver al home - solo si estamos en la p?gina de miembros */}
                   {isMembersPage && (
                     <motion.button
                       initial={{ opacity: 0, x: 20 }}
@@ -501,7 +490,7 @@ export default function Navigation() {
                     </motion.button>
                   )}
                   
-                  {/* Botón de Miembros - solo si está autenticado y NO estamos en la página de miembros */}
+                  {/* Bot?n de Miembros - solo si est? autenticado y NO estamos en la p?gina de miembros */}
                   {user && !loading && !isMembersPage && (
                     <motion.button
                       initial={{ opacity: 0, x: 20 }}
@@ -519,7 +508,7 @@ export default function Navigation() {
                     </motion.button>
                   )}
 
-                  {/* Botón de Miembros activo - solo si estamos en la página de miembros */}
+                  {/* Bot?n de Miembros activo - solo si estamos en la p?gina de miembros */}
                   {isMembersPage && (
                     <motion.button
                       initial={{ opacity: 0, x: 20 }}
@@ -540,7 +529,7 @@ export default function Navigation() {
                     </motion.button>
                   )}
 
-                  {/* Botón de Login - solo si no está autenticado */}
+                  {/* Bot?n de Login - solo si no est? autenticado */}
                   {!user && !loading && (
                     <motion.button
                       initial={{ opacity: 0, x: 20 }}
@@ -552,7 +541,7 @@ export default function Navigation() {
                       <div className="flex-shrink-0 w-5 h-5 text-gray-600">
                         <LoginIcon />
                       </div>
-                      <span className="font-sans font-medium text-base">Iniciar sesión</span>
+                      <span className="font-sans font-medium text-base">Iniciar sesi?n</span>
                     </motion.button>
                   )}
                 </div>
