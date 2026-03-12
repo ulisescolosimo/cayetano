@@ -58,7 +58,7 @@ export default function HowItWorksSection() {
     {
       number: 2,
       title: '18 entrevistas',
-      description: 'Algunas grabadas en locaciones especiales y otras en vivo en Paseo la Plaza - Sala Casals'
+      description: '18 entrevistas grabadas: algunas en locaciones especiales y otras en Paseo la Plaza - Sala Casals.'
     },
     {
       number: 3,
@@ -107,11 +107,11 @@ export default function HowItWorksSection() {
   const faqs = [
     {
       question: '¿Puedo participar si no vivo en Buenos Aires?',
-      answer: '¡Por supuesto! Proyecto 18 es para todos, sin importar dónde vivas. Puedes participar desde cualquier lugar del mundo. Las entrevistas se transmiten en vivo y puedes seguir todo el proceso de forma remota, participando en la creación de preguntas y sorteos desde donde estés.'
+      answer: '¡Por supuesto! Proyecto 18 es para todos, sin importar dónde vivas. Puedes participar desde cualquier lugar del mundo. Las entrevistas son grabadas y puedes seguir todo el proceso de forma remota, participando en la creación de preguntas y sorteos desde donde estés.'
     },
     {
       question: '¿Cómo se eligen las preguntas de cada entrevista?',
-      answer: 'Antes de cada entrevista, todos los socios-productores pueden enviar sus ideas, temas y preguntas. Luego, entre todos votamos y seleccionamos las mejores propuestas. Con eso se arma el guion final de cada entrevista, asegurando que las preguntas más interesantes y relevantes sean las que se hagan.'
+      answer: 'Antes de cada entrevista, todos los productores pueden enviar sus ideas, temas y preguntas. Luego, entre todos votamos y seleccionamos las mejores propuestas. Con eso se arma el guion final de cada entrevista, asegurando que las preguntas más interesantes y relevantes sean las que se hagan.'
     },
     {
       question: '¿El aporte es mensual o es un pago único?',
@@ -119,11 +119,11 @@ export default function HowItWorksSection() {
     },
     {
       question: '¿Cómo es la dinámica de los sorteos?',
-      answer: 'Los sorteos se realizan durante cada entrevista y también hay sorteos especiales a lo largo de las 18 entrevistas. Todo lo que se consiga del proyecto (premios, regalos de marcas aliadas, etc.) se sortea entre los socios-productores. La dinámica es transparente y todos tienen las mismas oportunidades de ganar.'
+      answer: 'Los sorteos se realizan durante cada entrevista y también hay sorteos especiales a lo largo de las 18 entrevistas. Todo lo que se consiga del proyecto (premios, regalos de marcas aliadas, etc.) se sortea entre los productores. La dinámica es transparente y todos tienen las mismas oportunidades de ganar.'
     },
     {
       question: '¿Cómo funciona el Gran Premio del viaje al Mundial 2026?',
-      answer: 'El Gran Premio es el sorteo final del proyecto. Entre todos los socios-productores que hayan participado durante las 18 entrevistas, se sorteará el viaje a la primera ronda del Mundial 2026. El ganador será seleccionado de forma aleatoria y transparente entre todos los socios del proyecto.'
+      answer: 'El Gran Premio es el sorteo final del proyecto. Entre todos los productores que hayan participado durante las 18 entrevistas, se sorteará el viaje a la primera ronda del Mundial 2026. El ganador será seleccionado de forma aleatoria y transparente entre todos los productores del proyecto.'
     }
   ]
 
@@ -257,7 +257,7 @@ export default function HowItWorksSection() {
               {/* Explicación */}
               <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8">
                 <p className="font-sans text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[36px] font-normal text-center" style={{ lineHeight: '94%' }}>
-                  No hay letra chica: lo que las marcas <br className="hidden sm:block" /> aporten, se sortea entre los socios.
+                  No hay letra chica: lo que las marcas <br className="hidden sm:block" /> aporten, se sortea entre los productores.
                 </p>
               </div>
 
