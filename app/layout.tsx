@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
-import { Shrikhand, Inter_Tight, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
+import { Shrikhand, Inter_Tight, Bebas_Neue, Montserrat, Oswald, Geist } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/context/AuthContext'
 import { CheckoutModalProvider } from '@/context/CheckoutModalContext'
 import UserBadge from '@/components/ui/UserBadge'
 import Navigation from '@/components/ui/Navigation'
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const shrikhand = Shrikhand({
   weight: '400',
@@ -95,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${shrikhand.variable} ${interTight.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable}`}>
+    <html lang="es" className={cn(shrikhand.variable, interTight.variable, bebasNeue.variable, montserrat.variable, oswald.variable, "font-sans", geist.variable)}>
       <body>
         <a
           href="#main-content"

@@ -69,6 +69,7 @@ export async function POST(request: NextRequest) {
       currency_id: 'ARS',
       dolar_rate_used: venta,
       preference_id: null,
+      provider: 'mercadopago',
     })
 
     if (insertError) {
