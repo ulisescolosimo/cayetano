@@ -363,7 +363,7 @@ export default function Navigation() {
                       transition={{ duration: 0.2 }}
                       className="font-sans text-sm font-medium whitespace-nowrap overflow-hidden"
                     >
-                      Iniciar sesi?n
+                      Iniciar sesión
                     </motion.span>
                   </motion.button>
                 )}
@@ -541,7 +541,7 @@ export default function Navigation() {
                       <div className="flex-shrink-0 w-5 h-5 text-gray-600">
                         <LoginIcon />
                       </div>
-                      <span className="font-sans font-medium text-base">Iniciar sesi?n</span>
+                      <span className="font-sans font-medium text-base">Iniciar sesión</span>
                     </motion.button>
                   )}
                 </div>
