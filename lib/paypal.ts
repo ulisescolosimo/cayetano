@@ -1,14 +1,14 @@
 /**
  * Utilidades para la API de PayPal (Orders v2).
- * Base URL: sandbox = api-m.sandbox.paypal.com, production = api-m.paypal.com
+ * Siempre usamos producción (api-m.paypal.com). No usamos sandbox.
  */
 
 const PAYPAL_AMOUNT_USD = 18
 
+const PAYPAL_BASE_URL = 'https://api-m.paypal.com'
+
 function getBaseUrl(): string {
-  const env = process.env.PAYPAL_ENVIRONMENT?.toLowerCase()
-  if (env === 'production') return 'https://api-m.paypal.com'
-  return 'https://api-m.sandbox.paypal.com'
+  return PAYPAL_BASE_URL
 }
 
 export async function getPayPalAccessToken(): Promise<string> {
@@ -18,9 +18,8 @@ export async function getPayPalAccessToken(): Promise<string> {
     throw new Error('PAYPAL_CLIENT_ID o PAYPAL_CLIENT_SECRET no configurados')
   }
   const base = getBaseUrl()
-  const isSandbox = base.includes('sandbox')
   if (process.env.NODE_ENV === 'development') {
-    console.log('[PayPal] Usando entorno:', isSandbox ? 'SANDBOX' : 'PRODUCTION', '→', base)
+    console.log('[PayPal] API producción →', base)
   }
   const auth = Buffer.from(`${clientId}:${clientSecret}`, 'utf-8').toString('base64')
   const res = await fetch(`${base}/v1/oauth2/token`, {
