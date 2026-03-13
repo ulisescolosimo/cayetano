@@ -3,7 +3,7 @@
  * Siempre usamos producción (api-m.paypal.com). No usamos sandbox.
  */
 
-const PAYPAL_AMOUNT_USD = 18
+const PAYPAL_AMOUNT_USD = 0.01
 
 const PAYPAL_BASE_URL = 'https://api-m.paypal.com'
 

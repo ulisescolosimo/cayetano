@@ -54,7 +54,7 @@ const MembersIcon = ({ className }: { className?: string }) => (
 const navItems: NavItem[] = [
   { label: 'Inicio', href: '#hero', id: 'hero', icon: <HomeIcon /> },
   { label: 'El Proyecto', href: '#proyecto', id: 'proyecto', icon: <ProjectIcon /> },
-  { label: 'C?mo Funciona', href: '#como-funciona', id: 'como-funciona', icon: <HowItWorksIcon /> },
+  { label: 'Cómo Funciona', href: '#como-funciona', id: 'como-funciona', icon: <HowItWorksIcon /> },
   { label: 'Sumate', href: '#sumate', id: 'sumate', icon: <JoinIcon /> },
 ]
 

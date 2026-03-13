@@ -159,7 +159,7 @@ export default function Hero() {
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
+                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center rounded-[13px] !px-4 sm:!px-5 md:!px-6 !py-3 sm:!py-3.5 md:!py-6 !font-sans !font-bold !text-[14px] sm:!text-[16px] md:!text-[18px] lg:!text-[20px] xl:!text-[22px] !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleJoinClick}
               >
                 <span className="sm:hidden">Aportá USD 18</span>
@@ -168,7 +168,7 @@ export default function Hero() {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white !px-4 !py-2 !rounded-[13px] !font-sans !font-bold !text-sm sm:!text-base !leading-[127%] !tracking-normal !whitespace-nowrap"
+                className="!flex !flex-1 sm:!flex-initial !min-w-0 !items-center !justify-center border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white rounded-[13px] !px-4 sm:!px-5 md:!px-6 !py-3 sm:!py-3.5 md:!py-6 !font-sans !font-bold !text-[14px] sm:!text-[16px] md:!text-[18px] lg:!text-[20px] xl:!text-[22px] !leading-[127%] !tracking-normal !whitespace-nowrap"
                 onClick={handleMoreInfoClick}
               >
                 Más información
