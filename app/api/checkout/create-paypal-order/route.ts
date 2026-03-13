@@ -3,37 +3,11 @@ import { randomUUID } from 'crypto'
 import { createSupabaseAdmin } from '@/lib/supabase/admin'
 import { createPayPalOrder, getPayPalAmountUsd } from '@/lib/paypal'
 
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email?.trim() ?? '')
-}
-
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const email = typeof body?.email === 'string' ? body.email.trim() : ''
-
-    if (!email || !isValidEmail(email)) {
-      return NextResponse.json(
-        { error: 'Email inválido o faltante' },
-        { status: 400 }
-      )
-    }
+    await request.json().catch(() => ({})) // payload no requerido; el email es solo referencia al volver
 
     const supabase = createSupabaseAdmin()
-
-    const { data: existingPayments } = await supabase
-      .from('payments')
-      .select('id, status')
-      .eq('email', email)
-      .in('status', ['approved', 'authorized'])
-
-    if (existingPayments && existingPayments.length > 0) {
-      return NextResponse.json(
-        { error: 'Ya realizaste tu aporte con este correo. Si no tenés cuenta, creala desde Iniciar sesión.' },
-        { status: 400 }
-      )
-    }
-
     const amountUsd = getPayPalAmountUsd()
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, '') || ''
 
@@ -41,7 +15,7 @@ export async function POST(request: NextRequest) {
     const { error: insertError } = await supabase.from('payments').insert({
       id: paymentId,
       status: 'pending',
-      email,
+      email: '',
       amount_usd: amountUsd,
       amount_total: amountUsd,
       currency_id: 'USD',
@@ -63,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     const { orderId, approvalUrl } = await createPayPalOrder({
       paymentId,
-      email,
+      email: '',
       returnUrl,
       cancelUrl,
     })

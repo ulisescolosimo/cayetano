@@ -12,13 +12,17 @@ function getBaseUrl(): string {
 }
 
 export async function getPayPalAccessToken(): Promise<string> {
-  const clientId = process.env.PAYPAL_CLIENT_ID
-  const clientSecret = process.env.PAYPAL_CLIENT_SECRET
+  const clientId = process.env.PAYPAL_CLIENT_ID?.trim()
+  const clientSecret = process.env.PAYPAL_CLIENT_SECRET?.trim()
   if (!clientId || !clientSecret) {
     throw new Error('PAYPAL_CLIENT_ID o PAYPAL_CLIENT_SECRET no configurados')
   }
   const base = getBaseUrl()
-  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+  const isSandbox = base.includes('sandbox')
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[PayPal] Usando entorno:', isSandbox ? 'SANDBOX' : 'PRODUCTION', '→', base)
+  }
+  const auth = Buffer.from(`${clientId}:${clientSecret}`, 'utf-8').toString('base64')
   const res = await fetch(`${base}/v1/oauth2/token`, {
     method: 'POST',
     headers: {
@@ -52,6 +56,7 @@ export async function createPayPalOrder(params: CreateOrderParams): Promise<Crea
   const { paymentId, returnUrl, cancelUrl } = params
   const token = await getPayPalAccessToken()
   const base = getBaseUrl()
+  const amountValue = Number(PAYPAL_AMOUNT_USD).toFixed(2)
   const body = {
     intent: 'CAPTURE',
     purchase_units: [
@@ -60,12 +65,13 @@ export async function createPayPalOrder(params: CreateOrderParams): Promise<Crea
         description: 'Aporte único - Productor del programa (USD 18)',
         amount: {
           currency_code: 'USD',
-          value: String(PAYPAL_AMOUNT_USD),
+          value: amountValue,
         },
       },
     ],
     application_context: {
       brand_name: 'Cayetano',
+      landing_page: 'NO_PREFERENCE',
       return_url: returnUrl,
       cancel_url: cancelUrl,
       user_action: 'PAY_NOW',
@@ -76,6 +82,7 @@ export async function createPayPalOrder(params: CreateOrderParams): Promise<Crea
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
+      'PayPal-Request-Id': paymentId,
     },
     body: JSON.stringify(body),
   })

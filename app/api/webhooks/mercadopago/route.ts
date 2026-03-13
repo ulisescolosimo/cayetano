@@ -91,6 +91,7 @@ async function processNotification(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            provider: 'mercadopago',
             email: updatedRow.email,
             payment_id: updatedRow.id,
             mp_payment_id: paymentIdMp,

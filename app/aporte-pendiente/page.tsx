@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Button from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import { supabase } from '@/lib/supabase/client'
 import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
 

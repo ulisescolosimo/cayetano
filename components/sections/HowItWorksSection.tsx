@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Container from '@/components/ui/Container'
-import Button from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import { useCheckoutModal } from '@/context/CheckoutModalContext'
 
 export default function HowItWorksSection() {

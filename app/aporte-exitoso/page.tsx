@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Button from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import { supabase } from '@/lib/supabase/client'
 import { translateSupabaseError } from '@/lib/utils/supabaseErrors'
 
@@ -13,6 +13,7 @@ function AporteExitosoContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const paymentId = searchParams.get('payment_id')
+  const paypalToken = searchParams.get('token') // order_id que PayPal añade al return_url
 
   const [email, setEmail] = useState<string | null>(null)
   const [password, setPassword] = useState('')
@@ -28,15 +29,38 @@ function AporteExitosoContent() {
       setPaymentLoading(false)
       return
     }
-    fetch(`/api/payments/${paymentId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.email != null) setEmail(data.email)
-        else setPaymentError('Pago no encontrado')
-      })
+
+    const run = async () => {
+      if (paypalToken) {
+        try {
+          const captureRes = await fetch('/api/checkout/capture-paypal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ payment_id: paymentId, order_id: paypalToken }),
+          })
+          if (!captureRes.ok) {
+            const data = await captureRes.json().catch(() => ({}))
+            setPaymentError(data?.error || 'Error al confirmar el pago con PayPal')
+            setPaymentLoading(false)
+            return
+          }
+        } catch {
+          setPaymentError('Error al confirmar el pago con PayPal')
+          setPaymentLoading(false)
+          return
+        }
+      }
+
+      const res = await fetch(`/api/payments/${paymentId}`)
+      const data = await res.json()
+      if (data.email != null) setEmail(data.email)
+      else setPaymentError('Pago no encontrado')
+    }
+
+    run()
       .catch(() => setPaymentError('Error al cargar los datos del pago'))
       .finally(() => setPaymentLoading(false))
-  }, [paymentId])
+  }, [paymentId, paypalToken])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

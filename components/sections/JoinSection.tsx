@@ -4,11 +4,15 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Container from '@/components/ui/Container'
-import Button from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import { MercadoPagoIcon } from '@/components/icons/MercadoPagoIcon'
+import { Paypal } from '@/components/ui/svgs/paypal'
+
+type PaymentProvider = 'mercadopago' | 'paypal'
 
 export default function JoinSection() {
   const [email, setEmail] = useState('')
+  const [provider, setProvider] = useState<PaymentProvider>('mercadopago')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -35,6 +39,25 @@ export default function JoinSection() {
     setError(null)
 
     try {
+      if (provider === 'paypal') {
+        const res = await fetch('/api/checkout/create-paypal-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        })
+        const data = await res.json()
+        if (!res.ok) {
+          setError(data?.error || 'Error al iniciar el pago')
+          return
+        }
+        if (data.approval_url) {
+          window.location.href = data.approval_url
+          return
+        }
+        setError('No se recibió la URL de pago')
+        return
+      }
+
       const res = await fetch('/api/checkout/create-preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -159,20 +182,56 @@ export default function JoinSection() {
                       autoComplete="email"
                     />
 
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setProvider('mercadopago')}
+                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors ${
+                          provider === 'mercadopago'
+                            ? 'border-[#318CE7] bg-[#318CE7]/20 text-white'
+                            : 'border-white/30 text-white/80 hover:border-white/50'
+                        }`}
+                      >
+                        <MercadoPagoIcon className="h-5 sm:h-6 w-auto shrink-0" aria-hidden />
+                        Mercado Pago
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setProvider('paypal')}
+                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors ${
+                          provider === 'paypal'
+                            ? 'border-[#008CFF] bg-[#008CFF]/20 text-white'
+                            : 'border-white/30 text-white/80 hover:border-white/50'
+                        }`}
+                      >
+                        <Paypal className="h-5 sm:h-6 w-6 shrink-0" aria-hidden />
+                        PayPal
+                      </button>
+                    </div>
+
                     <Button
                       type="submit"
                       variant="primary"
                       size="lg"
                       className="w-full rounded-[8px] sm:rounded-[10px] md:rounded-[12px] px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 text-white font-sans font-bold text-[13px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] flex flex-row items-center justify-center gap-2"
-                      style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                      style={{
+                        backgroundColor: provider === 'paypal' ? '#008CFF' : '#318CE7',
+                        lineHeight: '127%',
+                      }}
                       disabled={loading}
                     >
                       {loading ? (
-                        'Redirigiendo a MercadoPago...'
+                        provider === 'paypal'
+                          ? 'Redirigiendo a PayPal...'
+                          : 'Redirigiendo a MercadoPago...'
                       ) : (
                         <>
                           <span>Ir a pagar USD 18</span>
-                          <MercadoPagoIcon className="h-6 sm:h-7 md:h-8 w-auto shrink-0" aria-hidden />
+                          {provider === 'paypal' ? (
+                            <Paypal className="h-6 sm:h-7 md:h-8 w-6 sm:w-7 md:w-8 shrink-0" aria-hidden />
+                          ) : (
+                            <MercadoPagoIcon className="h-6 sm:h-7 md:h-8 w-auto shrink-0" aria-hidden />
+                          )}
                         </>
                       )}
                     </Button>

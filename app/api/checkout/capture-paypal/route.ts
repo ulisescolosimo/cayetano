@@ -68,6 +68,7 @@ export async function POST(request: NextRequest) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          provider: 'paypal',
           email: updatedRow.email,
           payment_id: updatedRow.id,
           mp_payment_id: captureId || orderId,

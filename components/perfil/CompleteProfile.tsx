@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useProfile } from '@/hooks/useProfile'
 import { useAuth } from '@/context/AuthContext'
-import Button from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 import { COUNTRIES } from '@/lib/utils/countries'
 
