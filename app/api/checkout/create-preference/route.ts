@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { randomUUID } from 'crypto'
 import { createSupabaseAdmin } from '@/lib/supabase/admin'
 
-const AMOUNT_USD = 0.1
+const AMOUNT_USD = 18
 const DOLAR_API_OFICIAL = 'https://dolarapi.com/v1/dolares/oficial'
 const MP_PREFERENCES_URL = 'https://api.mercadopago.com/checkout/preferences'
 
