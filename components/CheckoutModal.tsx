@@ -50,7 +50,7 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
         const res = await fetch("/api/checkout/create-paypal-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({}),
+          body: JSON.stringify({ email: email.trim() }),
         });
         const data = await res.json();
         if (!res.ok) {

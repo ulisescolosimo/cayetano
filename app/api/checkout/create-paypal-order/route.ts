@@ -5,7 +5,8 @@ import { createPayPalOrder, getPayPalAmountUsd } from '@/lib/paypal'
 
 export async function POST(request: NextRequest) {
   try {
-    await request.json().catch(() => ({})) // payload no requerido; el email es solo referencia al volver
+    const body = await request.json().catch(() => ({}))
+    const email = typeof body?.email === 'string' ? body.email.trim() : ''
 
     const supabase = createSupabaseAdmin()
     const amountUsd = getPayPalAmountUsd()
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
     const { error: insertError } = await supabase.from('payments').insert({
       id: paymentId,
       status: 'pending',
-      email: '',
+      email,
       amount_usd: amountUsd,
       amount_total: amountUsd,
       currency_id: 'USD',
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     const { orderId, approvalUrl } = await createPayPalOrder({
       paymentId,
-      email: '',
+      email,
       returnUrl,
       cancelUrl,
     })

@@ -53,8 +53,11 @@ function AporteExitosoContent() {
 
       const res = await fetch(`/api/payments/${paymentId}`)
       const data = await res.json()
-      if (data.email != null) setEmail(data.email)
-      else setPaymentError('Pago no encontrado')
+      if (!res.ok) {
+        setPaymentError(data?.error || 'Pago no encontrado')
+        return
+      }
+      setEmail(data.email != null && data.email !== '' ? data.email : '')
     }
 
     run()
@@ -65,7 +68,11 @@ function AporteExitosoContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
-    if (!email) return
+    const emailTrimmed = (email ?? '').trim()
+    if (!emailTrimmed) {
+      setError('Ingresá tu correo electrónico')
+      return
+    }
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden')
       return
@@ -77,7 +84,7 @@ function AporteExitosoContent() {
 
     setLoading(true)
     try {
-      const { error: signUpError } = await supabase.auth.signUp({ email, password })
+      const { error: signUpError } = await supabase.auth.signUp({ email: emailTrimmed, password })
       if (signUpError) throw signUpError
       router.push('/miembros')
       router.refresh()
@@ -99,7 +106,7 @@ function AporteExitosoContent() {
     )
   }
 
-  if (paymentError || !email) {
+  if (paymentError) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white py-8 px-4">
         <motion.div
@@ -107,7 +114,7 @@ function AporteExitosoContent() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-md w-full text-center"
         >
-          <p className="font-sans text-gray-700 mb-4">{paymentError || 'No se encontró el pago'}</p>
+          <p className="font-sans text-gray-700 mb-4">{paymentError}</p>
           <Link href="/#sumate" className="text-[#318CE7] font-sans font-bold hover:underline">
             Volver a intentar
           </Link>
@@ -153,9 +160,11 @@ function AporteExitosoContent() {
               <label className="block text-xs font-sans font-medium text-gray-700 mb-1.5">Correo electrónico</label>
               <input
                 type="email"
-                value={email}
-                readOnly
-                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-600 font-sans text-sm bg-gray-50"
+                value={email ?? ''}
+                onChange={(e) => setEmail(e.target.value)}
+                readOnly={email !== ''}
+                placeholder={email ? undefined : 'Ingresá el correo con el que pagaste'}
+                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-600 font-sans text-sm bg-gray-50 read-only:bg-gray-50 read-only:cursor-default"
               />
             </div>
 
@@ -206,7 +215,7 @@ function AporteExitosoContent() {
           <div className="text-center pt-4">
             <p className="font-sans text-xs text-gray-600">
               ¿Ya tenés cuenta?{' '}
-              <Link href={`/login?email=${encodeURIComponent(email)}`} className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors">
+              <Link href={`/login?email=${encodeURIComponent(email ?? '')}`} className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors">
                 Iniciá sesión
               </Link>
             </p>
