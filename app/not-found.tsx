@@ -96,7 +96,7 @@ export default function NotFound() {
             <Link href="/" className="w-full sm:w-auto">
               <Button
                 variant="primary"
-                size="md"
+                size="default"
                 className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-white font-sans font-bold text-sm hover:scale-105 transition-transform"
                 style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
               >
@@ -107,7 +107,7 @@ export default function NotFound() {
             <Link href="/#proyecto" className="w-full sm:w-auto">
               <Button
                 variant="outline"
-                size="md"
+                size="default"
                 className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-brand font-sans font-bold text-sm border-2 border-brand hover:scale-105 transition-transform"
                 style={{ lineHeight: '127%' }}
               >
