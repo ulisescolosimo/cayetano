@@ -129,7 +129,7 @@ function RegisterForm() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -146,7 +146,7 @@ function RegisterForm() {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                   placeholder="Mínimo 6 caracteres"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -166,7 +166,7 @@ function RegisterForm() {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                   placeholder="Repetí tu contraseña"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -179,8 +179,7 @@ function RegisterForm() {
                 type="submit"
                 variant="primary"
                 size="lg"
-                className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm"
-                style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm leading-[127%]"
                 disabled={loading}
               >
                 {loading ? 'Creando cuenta...' : 'Crear cuenta'}
@@ -192,7 +191,7 @@ function RegisterForm() {
                 ¿Ya tenés cuenta?{' '}
                 <Link
                   href="/login"
-                  className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors"
+                  className="font-bold text-brand hover:text-brand-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded"
                 >
                   Iniciá sesión
                 </Link>

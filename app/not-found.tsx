@@ -97,8 +97,7 @@ export default function NotFound() {
               <Button
                 variant="primary"
                 size="default"
-                className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-white font-sans font-bold text-sm hover:scale-105 transition-transform"
-                style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-white font-sans font-bold text-sm hover:scale-105 transition-transform leading-[127%]"
               >
                 Volver al inicio
               </Button>
@@ -108,8 +107,7 @@ export default function NotFound() {
               <Button
                 variant="outline"
                 size="default"
-                className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-brand font-sans font-bold text-sm border-2 border-brand hover:scale-105 transition-transform"
-                style={{ lineHeight: '127%' }}
+                className="w-full sm:w-auto rounded-[13px] px-5 py-2.5 text-brand font-sans font-bold text-sm border-2 border-brand hover:scale-105 transition-transform leading-[127%]"
               >
                 Conocer el proyecto
               </Button>

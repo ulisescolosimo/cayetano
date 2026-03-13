@@ -44,6 +44,8 @@ const config: Config = {
           light: '#5BA3F0',
           dark: '#1E6BB8',
         },
+        'surface-dark': 'var(--surface-dark)',
+        'surface-dark-modal': 'var(--surface-dark-modal)',
       },
       borderRadius: {
         lg: 'var(--radius)',

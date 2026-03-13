@@ -424,7 +424,7 @@ export default function Navigation() {
               <div className="p-6 h-full flex flex-col">
                 {/* Header del drawer */}
                 <div className="flex items-center justify-between mb-8">
-                  <h2 className="font-sans font-bold text-lg text-gray-800">Men?</h2>
+                  <h2 className="font-sans font-bold text-lg text-gray-800">Menú</h2>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 text-gray-600 hover:text-brand transition-colors"

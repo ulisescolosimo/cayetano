@@ -56,12 +56,11 @@ export default function Project18Section() {
               initial={{ opacity: 0, x: -50 }}
               animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="p-4 sm:p-6 md:p-8 lg:p-6 lg:py-10 flex flex-col rounded-[16px] self-start"
-              style={{ backgroundColor: 'rgba(230, 230, 230)' }}
+              className="p-4 sm:p-6 md:p-8 lg:p-6 lg:py-10 flex flex-col rounded-[16px] self-start bg-gray-200/90"
             >
             {/* Título principal */}
             <div className="mb-4 sm:mb-5 md:mb-6">
-              <h2 className="font-display text-[20px] sm:text-[24px] md:text-[24px] lg:text-[28px] font-normal leading-[109%]" style={{ color: '#3F3F3F' }}>
+              <h2 className="font-display text-[20px] sm:text-[24px] md:text-[24px] lg:text-[28px] font-normal leading-[109%] text-foreground">
                 18 entrevistas. <span className="text-brand italic">1 pasión.</span> Producido por los <span className="text-brand italic">hinchas, para el mundo</span>
               </h2>
             </div>

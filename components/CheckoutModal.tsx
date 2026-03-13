@@ -108,8 +108,7 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="pointer-events-auto w-full max-w-md rounded-[16px] p-6 sm:p-8 shadow-xl"
-              style={{ backgroundColor: "rgba(80, 80, 80, 0.98)" }}
+              className="pointer-events-auto w-full max-w-md rounded-[16px] p-6 sm:p-8 shadow-xl bg-surface-dark-modal"
               role="dialog"
               aria-modal="true"
               aria-labelledby="checkout-modal-title"
@@ -125,7 +124,7 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                  className="p-2 min-w-[44px] min-h-[44px] rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-transparent"
                   aria-label="Cerrar"
                 >
                   <svg
@@ -164,8 +163,8 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
                     setEmail(e.target.value);
                     if (error) setError(null);
                   }}
-                  placeholder="Correo para tu cuenta / registro"
-                  className="w-full px-4 py-3 rounded-[10px] font-sans text-base text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
+                  placeholder="Correo para tu cuenta o registro"
+                  className="w-full px-4 py-3 rounded-[10px] font-sans text-base text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
                   required
                   autoComplete="email"
                 />
@@ -174,9 +173,9 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
                   <button
                     type="button"
                     onClick={() => setProvider("mercadopago")}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-[10px] font-sans font-medium text-sm border-2 transition-colors ${
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-[10px] font-sans font-medium text-sm border-2 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${
                       provider === "mercadopago"
-                        ? "border-[#318CE7] bg-[#318CE7]/20 text-white"
+                        ? "border-brand bg-brand/20 text-white"
                         : "border-white/30 text-white/80 hover:border-white/50"
                     }`}
                   >
@@ -186,7 +185,7 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
                   <button
                     type="button"
                     onClick={() => setProvider("paypal")}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-[10px] font-sans font-medium text-sm border-2 transition-colors ${
+                    className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-[10px] font-sans font-medium text-sm border-2 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${
                       provider === "paypal"
                         ? "border-[#008CFF] bg-[#008CFF]/20 text-white"
                         : "border-white/30 text-white/80 hover:border-white/50"
@@ -199,14 +198,9 @@ export default function CheckoutModal({ open, onClose }: CheckoutModalProps) {
 
                 <Button
                   type="submit"
-                  variant="default"
+                  variant="primary"
                   size="lg"
-                  className="w-full rounded-[10px] px-5 py-3.5 text-white font-sans font-bold text-base flex flex-row items-center justify-center gap-2"
-                  style={{
-                    backgroundColor:
-                      provider === "paypal" ? "#008CFF" : "#318CE7",
-                    lineHeight: "127%",
-                  }}
+                  className={`w-full rounded-[10px] px-5 py-3.5 text-white font-sans font-bold text-base flex flex-row items-center justify-center gap-2 leading-[127%] min-h-[44px] ${provider === "paypal" ? "!bg-[#008CFF] hover:!bg-[#0070DD]" : ""}`}
                   disabled={loading}
                 >
                   {loading ? (

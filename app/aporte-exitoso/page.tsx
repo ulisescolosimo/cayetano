@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -25,6 +25,20 @@ function AporteExitosoContent() {
   const [paymentError, setPaymentError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const purchaseTracked = useRef(false)
+
+  // Meta Pixel: evento Purchase cuando el aporte se confirma (página de éxito)
+  useEffect(() => {
+    if (paymentLoading || paymentError || purchaseTracked.current) return
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Purchase', {
+        value: 18,
+        currency: 'USD',
+        content_name: 'Aporte Proyecto 18',
+      })
+      purchaseTracked.current = true
+    }
+  }, [paymentLoading, paymentError])
 
   useEffect(() => {
     if (!paymentId) {
@@ -118,7 +132,7 @@ function AporteExitosoContent() {
           className="max-w-md w-full text-center"
         >
           <p className="font-sans text-gray-700 mb-4">{paymentError}</p>
-          <Link href="/#sumate" className="text-[#318CE7] font-sans font-bold hover:underline">
+          <Link href="/#sumate" className="text-brand font-sans font-bold hover:text-brand-dark hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
             Volver a intentar
           </Link>
         </motion.div>
@@ -167,7 +181,7 @@ function AporteExitosoContent() {
                 onChange={(e) => setEmail(e.target.value)}
                 readOnly={email !== ''}
                 placeholder={email ? undefined : 'Ingresá el correo con el que pagaste'}
-                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-600 font-sans text-sm bg-gray-50 read-only:bg-gray-50 read-only:cursor-default"
+                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-600 font-sans text-sm bg-gray-50 read-only:bg-gray-50 read-only:cursor-default focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
               />
             </div>
 
@@ -182,14 +196,14 @@ function AporteExitosoContent() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Mínimo 6 caracteres"
-                  className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7]"
+                  className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                   required
                   autoComplete="new-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#318CE7] rounded"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-2 min-w-[44px] min-h-[44px] -m-2 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded"
                   aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                 >
                   {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -208,14 +222,14 @@ function AporteExitosoContent() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Repetí tu contraseña"
-                  className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7]"
+                  className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                   required
                   autoComplete="new-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword((v) => !v)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#318CE7] rounded"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-2 min-w-[44px] min-h-[44px] -m-2 flex items-center justify-center text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded"
                   aria-label={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                 >
                   {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -227,8 +241,7 @@ function AporteExitosoContent() {
               type="submit"
               variant="primary"
               size="lg"
-              className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm"
-              style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+              className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm leading-[127%]"
               disabled={loading}
             >
               {loading ? 'Creando cuenta...' : 'Crear cuenta'}
@@ -238,7 +251,7 @@ function AporteExitosoContent() {
           <div className="text-center pt-4">
             <p className="font-sans text-xs text-gray-600">
               ¿Ya tenés cuenta?{' '}
-              <Link href={`/login?email=${encodeURIComponent(email ?? '')}`} className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors">
+              <Link href={`/login?email=${encodeURIComponent(email ?? '')}`} className="font-bold text-brand hover:text-brand-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
                 Iniciá sesión
               </Link>
             </p>

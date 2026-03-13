@@ -32,20 +32,19 @@ export default function AporteErrorPage() {
           <div className="space-y-3">
             <Link
               href="/#sumate"
-              className="block w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm text-center transition-colors"
-              style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+              className="block w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm text-center transition-colors bg-brand hover:bg-brand-dark leading-[127%] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               Reintentar pago
             </Link>
             <Link
               href="/register"
-              className="block w-full rounded-[13px] px-4 py-2.5 font-sans font-bold text-sm text-center border-2 border-[#318CE7] text-[#318CE7] hover:bg-[#318CE7] hover:text-white transition-colors"
+              className="block w-full rounded-[13px] px-4 py-2.5 font-sans font-bold text-sm text-center border-2 border-brand text-brand hover:bg-brand hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               Crear cuenta
             </Link>
             <p className="font-sans text-xs text-gray-500 mt-2">
               Si ya realizaste el pago, podés crear tu cuenta desde{' '}
-              <Link href="/login" className="text-[#318CE7] font-medium hover:underline">
+              <Link href="/login" className="text-brand font-medium hover:text-brand-dark hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
                 Iniciar sesión
               </Link>
               .

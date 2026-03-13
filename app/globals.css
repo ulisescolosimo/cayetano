@@ -8,6 +8,8 @@
   --brand: #318CE7;
   --brand-light: #5BA3F0;
   --brand-dark: #1E6BB8;
+  --surface-dark: rgba(80, 80, 80, 0.95);
+  --surface-dark-modal: rgba(80, 80, 80, 0.98);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -75,6 +77,16 @@
   html {
     scroll-behavior: smooth;
     @apply font-sans;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   body {

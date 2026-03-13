@@ -160,7 +160,7 @@ export default function ProfilePage() {
                       name="nombre"
                       type="text"
                       required
-                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                       placeholder="Tu nombre"
                       value={nombre}
                       onChange={(e) => setNombre(e.target.value)}
@@ -176,7 +176,7 @@ export default function ProfilePage() {
                       name="apellido"
                       type="text"
                       required
-                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                       placeholder="Tu apellido"
                       value={apellido}
                       onChange={(e) => setApellido(e.target.value)}
@@ -193,7 +193,7 @@ export default function ProfilePage() {
                     <select
                       id="pais"
                       name="pais"
-                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all bg-white"
                       value={pais}
                       onChange={(e) => setPais(e.target.value)}
                     >
@@ -213,7 +213,7 @@ export default function ProfilePage() {
                     <select
                       id="genero"
                       name="genero"
-                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all bg-white"
+                      className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all bg-white"
                       value={genero}
                       onChange={(e) => setGenero(e.target.value as 'masculino' | 'femenino' | '')}
                     >
@@ -250,8 +250,7 @@ export default function ProfilePage() {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm"
-                  style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                  className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm leading-[127%]"
                   disabled={loading}
                 >
                   {loading ? 'Guardando...' : 'Guardar cambios'}

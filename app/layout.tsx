@@ -5,7 +5,8 @@ import { AuthProvider } from '@/context/AuthContext'
 import { CheckoutModalProvider } from '@/context/CheckoutModalContext'
 import UserBadge from '@/components/ui/UserBadge'
 import Navigation from '@/components/ui/Navigation'
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
+import { Analytics } from '@/components/analytics/Analytics'
 
 const shrikhand = Shrikhand({
   weight: '400',
@@ -98,6 +99,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={cn(shrikhand.variable, interTight.variable, bebasNeue.variable, montserrat.variable, oswald.variable, "font-sans")}>
       <body>
+        <Analytics />
         <a
           href="#main-content"
           className="sr-only focus:fixed focus:inset-auto focus:top-4 focus:left-4 focus:right-auto focus:bottom-auto focus:z-[100] focus:w-auto focus:h-auto focus:px-4 focus:py-2 focus:m-0 focus:overflow-visible focus:[clip:auto] focus:whitespace-normal focus:bg-brand focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand font-sans font-medium"

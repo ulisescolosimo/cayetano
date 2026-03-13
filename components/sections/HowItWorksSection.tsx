@@ -71,7 +71,7 @@ export default function HowItWorksSection() {
   const benefits = [
     {
       title: 'Ser co-productor',
-      description: 'TTus preguntas pueden quedar seleccionadas para los guiones de las entrevistas.'
+      description: 'Tus preguntas pueden quedar seleccionadas para los guiones de las entrevistas.'
     },
     {
       title: 'Somos una comunidad',
@@ -139,9 +139,9 @@ export default function HowItWorksSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10"
             >
-              <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px]" style={{ lineHeight: '78%' }}>
-                <span className="font-sans font-semibold" style={{ color: '#318CE7' }}>Cómo</span> <br />
-                <span className="font-display font-normal" style={{ color: '#318CE7' }}> funciona</span>
+              <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] leading-[78%]">
+                <span className="font-sans font-semibold text-brand">Cómo</span> <br />
+                <span className="font-display font-normal text-brand"> funciona</span>
               </h2>
             </motion.div>
 
@@ -153,12 +153,11 @@ export default function HowItWorksSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col"
-                style={{ backgroundColor: 'rgba(230, 230, 230)' }}
+                className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col bg-gray-200/90"
               >
                 {/* Número */}
                 <div className="mb-2 sm:mb-3 md:mb-4">
-                  <span className="font-display text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-bold" style={{ color: '#318CE7' }}>
+                  <span className="font-display text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-bold text-brand">
                     {step.number}
                   </span>
                 </div>
@@ -187,11 +186,11 @@ export default function HowItWorksSection() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center"
               >
-                <h2 className="text-center" style={{ lineHeight: '94%' }}>
-                  <span className="font-display text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-normal" style={{ color: '#318CE7' }}>
+                <h2 className="text-center leading-[94%]">
+                  <span className="font-display text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-normal text-brand">
                     Beneficios{' '}
                   </span>
-                  <span className="font-sans text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-semibold lowercase" style={{ lineHeight: '94%', color: '#318CE7' }}>
+                  <span className="font-sans text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] xl:text-[56px] font-semibold lowercase leading-[94%] text-brand">
                     de ser <br/> productor del programa
                   </span>
                 </h2>
@@ -205,8 +204,7 @@ export default function HowItWorksSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col"
-                    style={{ backgroundColor: '#318CE7' }}
+                    className="p-3 sm:p-4 md:p-5 lg:p-6 rounded-[12px] sm:rounded-[16px] flex flex-col bg-brand"
                   >
                     {/* Título */}
                     <h3 className="font-sans text-[18px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] font-bold text-white mb-1.5 sm:mb-2 md:mb-3">
@@ -233,21 +231,21 @@ export default function HowItWorksSection() {
             >
               {/* Título */}
               <div className="mb-3 sm:mb-4 md:mb-6">
-                <h2 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold text-center" style={{ lineHeight: '94%', color: '#3F3F3F' }}>
+                <h2 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold text-center leading-[94%] text-foreground">
                   Regla simple
                 </h2>
               </div>
 
               {/* Mensaje principal */}
               <div className="mb-3 sm:mb-4 md:mb-6">
-                <p className="font-display text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] font-normal text-center" style={{ color: '#318CE7', lineHeight: '94%' }}>
+                <p className="font-display text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] xl:text-[56px] font-normal text-center text-brand leading-[94%]">
                   Lo que logra proyecto 18 es para proyecto 18.
                 </p>
               </div>
 
               {/* Explicación */}
               <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8">
-                <p className="font-sans text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[36px] font-normal text-center" style={{ lineHeight: '94%' }}>
+                <p className="font-sans text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[36px] font-normal text-center leading-[94%]">
                   No hay letra chica: lo que las marcas <br className="hidden sm:block" /> aporten, se sortea entre los productores.
                 </p>
               </div>
@@ -257,8 +255,7 @@ export default function HowItWorksSection() {
                 <Button
                   variant="primary"
                   size="lg"
-                  className="rounded-[13px] px-3 sm:px-4 py-2 sm:py-2.5 text-white font-sans font-bold text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] w-full sm:w-auto"
-                  style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                  className="w-full sm:w-auto rounded-[13px] px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-6 font-sans font-bold text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] leading-[127%] tracking-normal"
                   onClick={handleJoinClick}
                 >
                   Sumarme ahora por USD 18
@@ -277,7 +274,7 @@ export default function HowItWorksSection() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 xl:mb-10 text-center"
               >
-                <h2 className="font-display text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] xl:text-[36px] font-bold italic" style={{ color: '#3F3F3F' }}>
+                <h2 className="font-display text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] xl:text-[36px] font-bold italic text-foreground">
                   Preguntas frecuentes
                 </h2>
               </motion.div>
@@ -303,7 +300,7 @@ export default function HowItWorksSection() {
                       id={`faq-question-${index}`}
                       className="w-full p-3 sm:p-4 md:p-5 lg:p-6 text-left flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded-[12px] sm:rounded-[16px]"
                     >
-                      <h3 className="font-sans text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-bold text-white text-left flex-1 relative z-10" style={{ lineHeight: '94%' }}>
+                      <h3 className="font-sans text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-bold text-white text-left flex-1 relative z-10 leading-[94%]">
                         {faq.question}
                       </h3>
                       <svg
@@ -311,7 +308,6 @@ export default function HowItWorksSection() {
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        style={{ color: 'white' }}
                         aria-hidden
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

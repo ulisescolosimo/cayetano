@@ -100,7 +100,7 @@ function LoginForm() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                  className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -118,7 +118,7 @@ function LoginForm() {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="current-password"
                     required
-                    className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7] transition-all"
+                    className="w-full px-3 py-2.5 pr-10 rounded-[13px] border-2 border-gray-200 text-gray-900 placeholder-gray-400 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand transition-all"
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -126,7 +126,7 @@ function LoginForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors focus:outline-none focus:text-[#318CE7]"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 min-w-[44px] min-h-[44px] -m-2 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded focus:text-brand"
                     aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                   >
                     {showPassword ? (
@@ -149,8 +149,7 @@ function LoginForm() {
                 type="submit"
                 variant="primary"
                 size="lg"
-                className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm"
-                style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+                className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm leading-[127%]"
                 disabled={loading}
               >
                 {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
@@ -162,7 +161,7 @@ function LoginForm() {
                 ¿Pagaste pero no pudiste completar tu cuenta? Usá el mismo correo que en MercadoPago y{' '}
                 <Link
                   href={email ? `/register?postpago=1&email=${encodeURIComponent(email)}` : '/register?postpago=1'}
-                  className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors"
+                  className="font-bold text-brand hover:text-brand-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded"
                 >
                   creala acá
                 </Link>
@@ -190,7 +189,7 @@ export default function LoginPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-10 h-10 border-4 border-[#318CE7] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <LoginForm />

@@ -101,7 +101,7 @@ export default function JoinSection() {
             transition={{ duration: 0.6 }}
             className="mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12 text-center px-2"
           >
-            <h2 className="font-display text-[20px] sm:text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-normal flex flex-row items-center justify-center gap-2 sm:gap-2 md:gap-3 lg:gap-4" style={{ color: '#3F3F3F' }}>
+            <h2 className="font-display text-[20px] sm:text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-normal flex flex-row items-center justify-center gap-2 sm:gap-2 md:gap-3 lg:gap-4 text-foreground">
               <div className="hidden sm:flex items-center gap-1 sm:gap-1.5">
                 <Image src="/images/⚽.png" alt="Pelota" width={32} height={32} className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" />
                 <svg width="24" height="24" viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10">
@@ -129,8 +129,7 @@ export default function JoinSection() {
               initial={{ opacity: 0, y: 50 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10"
-              style={{ backgroundColor: 'rgba(80, 80, 80, 0.95)' }}
+              className="rounded-[12px] sm:rounded-[16px] md:rounded-[20px] lg:rounded-[24px] p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 bg-surface-dark"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
                 <motion.div
@@ -143,7 +142,7 @@ export default function JoinSection() {
                     <div className="flex items-center gap-0.5 sm:gap-1">
                       <Image src="/images/⚽.png" alt="Pelota" width={24} height={24} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                     </div>
-                    <h3 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold" style={{ lineHeight: '80%', color: '#96CAFF' }}>
+                    <h3 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold text-brand-light leading-[80%]">
                       Sumate hoy.
                     </h3>
                   </div>
@@ -176,8 +175,8 @@ export default function JoinSection() {
                         setEmail(e.target.value)
                         if (error) setError(null)
                       }}
-                      placeholder="Correo para tu cuenta / registro"
-                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#318CE7]"
+                      placeholder="Correo para tu cuenta o registro"
+                      className="w-full px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-[8px] sm:rounded-[10px] font-sans text-[14px] sm:text-[15px] md:text-[16px] text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
                       required
                       autoComplete="email"
                     />
@@ -186,9 +185,9 @@ export default function JoinSection() {
                       <button
                         type="button"
                         onClick={() => setProvider('mercadopago')}
-                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors ${
+                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${
                           provider === 'mercadopago'
-                            ? 'border-[#318CE7] bg-[#318CE7]/20 text-white'
+                            ? 'border-brand bg-brand/20 text-white'
                             : 'border-white/30 text-white/80 hover:border-white/50'
                         }`}
                       >
@@ -198,7 +197,7 @@ export default function JoinSection() {
                       <button
                         type="button"
                         onClick={() => setProvider('paypal')}
-                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors ${
+                        className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-[8px] sm:rounded-[10px] font-sans font-medium text-[12px] sm:text-[13px] md:text-[14px] border-2 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 ${
                           provider === 'paypal'
                             ? 'border-[#008CFF] bg-[#008CFF]/20 text-white'
                             : 'border-white/30 text-white/80 hover:border-white/50'
@@ -213,11 +212,7 @@ export default function JoinSection() {
                       type="submit"
                       variant="primary"
                       size="lg"
-                      className="w-full rounded-[8px] sm:rounded-[10px] md:rounded-[12px] px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 text-white font-sans font-bold text-[13px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] flex flex-row items-center justify-center gap-2"
-                      style={{
-                        backgroundColor: provider === 'paypal' ? '#008CFF' : '#318CE7',
-                        lineHeight: '127%',
-                      }}
+                      className={`w-full rounded-[8px] sm:rounded-[10px] md:rounded-[12px] px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 lg:py-4 text-white font-sans font-bold text-[13px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] flex flex-row items-center justify-center gap-2 leading-[127%] min-h-[44px] ${provider === 'paypal' ? '!bg-[#008CFF] hover:!bg-[#0070DD]' : ''}`}
                       disabled={loading}
                     >
                       {loading ? (

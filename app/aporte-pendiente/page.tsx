@@ -83,7 +83,7 @@ function AportePendienteContent() {
           className="max-w-md w-full text-center"
         >
           <p className="font-sans text-gray-700 mb-4">{paymentError || 'No se encontró el pago'}</p>
-          <Link href="/#sumate" className="text-[#318CE7] font-sans font-bold hover:underline">
+          <Link href="/#sumate" className="text-brand font-sans font-bold hover:text-brand-dark hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
             Volver a intentar
           </Link>
         </motion.div>
@@ -144,7 +144,7 @@ function AportePendienteContent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mínimo 6 caracteres"
-                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7]"
+                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                 required
                 autoComplete="new-password"
               />
@@ -160,7 +160,7 @@ function AportePendienteContent() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Repetí tu contraseña"
-                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[#318CE7] focus:border-[#318CE7]"
+                className="w-full px-3 py-2.5 rounded-[13px] border-2 border-gray-200 text-gray-900 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                 required
                 autoComplete="new-password"
               />
@@ -170,8 +170,7 @@ function AportePendienteContent() {
               type="submit"
               variant="primary"
               size="lg"
-              className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm"
-              style={{ backgroundColor: '#318CE7', lineHeight: '127%' }}
+              className="w-full rounded-[13px] px-4 py-2.5 text-white font-sans font-bold text-sm leading-[127%]"
               disabled={loading}
             >
               {loading ? 'Creando cuenta...' : 'Crear cuenta'}
@@ -181,7 +180,7 @@ function AportePendienteContent() {
           <div className="text-center pt-4">
             <p className="font-sans text-xs text-gray-600">
               ¿Ya tenés cuenta?{' '}
-              <Link href={`/login?email=${encodeURIComponent(email)}`} className="font-bold text-[#318CE7] hover:text-[#2563eb] transition-colors">
+              <Link href={`/login?email=${encodeURIComponent(email)}`} className="font-bold text-brand hover:text-brand-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded">
                 Iniciá sesión
               </Link>
             </p>
